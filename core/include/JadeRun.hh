@@ -9,6 +9,7 @@
 #include "JadeAnalysis.hh"
 
 #include <string>
+#include <climits>
 
 class DLLEXPORT JadeRun{
  public:
@@ -30,6 +31,7 @@ class DLLEXPORT JadeRun{
   JadeReadSP m_rd;
   JadeFilterSP m_flt;
   JadeAnalysisSP m_ana;
+  int m_read_numbers;
 
 };
 

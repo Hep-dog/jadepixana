@@ -15,6 +15,7 @@ JadeCluster::JadeCluster()
     , m_cluster_thr(0)
     , m_neigh_thr(0)
     , m_size(0)
+    , m_distance_cut(3)
     , m_is_seed_find(false)
 {
 }
@@ -26,6 +27,7 @@ JadeCluster::JadeCluster(JadeDataFrameSP df)
     , m_cluster_thr(0)
     , m_neigh_thr(0)
     , m_size(0)
+    , m_distance_cut(3)
     , m_is_seed_find(false)
     , m_is_cluster_find(false)
 {
@@ -58,6 +60,11 @@ void JadeCluster::SetNeighbourTHR(int16_t thr)
 void JadeCluster::SetClusterSize(size_t size)
 {
   m_size = size;
+}
+
+void JadeCluster::SetDistanceCut(double cut)
+{
+  m_distance_cut = cut;
 }
 
 bool JadeCluster::IsInEdge(size_t x, size_t y) const
@@ -132,6 +139,27 @@ void JadeCluster::FindSeed()
       [](auto& s1, auto& s2) { return s1.adc > s2.adc; });
 
   m_is_seed_find = true;
+}
+
+void JadeCluster::FindPileUp()
+{
+  auto _seed = m_seed;
+  m_seed.erase(std::remove_if(m_seed.begin(), m_seed.end(),
+                   [=](auto& s1) {
+                     return std::count_if(_seed.begin(), _seed.end(),
+                                [&s1, this](auto& s2) { return this->GetDistance(s1.coord, s2.coord) < m_distance_cut; })
+                         > 1;
+                   }),
+      m_seed.end());
+
+  m_pileup_counts = _seed.size() - m_seed.size();
+}
+
+double JadeCluster::GetDistance(std::pair<size_t, size_t> p1, std::pair<size_t, size_t> p2)
+{
+  auto x = p1.first - p2.first;
+  auto y = p1.second - p2.second;
+  return std::sqrt(x * x + y * y);
 }
 
 std::vector<std::pair<size_t, size_t> > JadeCluster::GetSeedCoord()
@@ -239,6 +267,11 @@ std::vector<int16_t> JadeCluster::GetClusterADC()
       [](auto& c) { return c.total_adc; });
 
   return _cluster_adc;
+}
+
+int JadeCluster::GetPileUpCounts()
+{
+  return m_pileup_counts;
 }
 
 std::vector<std::pair<double, double> > JadeCluster::GetCenterOfGravity()

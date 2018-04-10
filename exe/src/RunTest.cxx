@@ -65,20 +65,20 @@ int main(int argc, char** argv)
   std::cout << conf_read_para.DumpString() << std::endl;
   std::cout << conf_flt_para.DumpString() << std::endl;
   std::cout << conf_ana_para.DumpString() << std::endl;
-  JadeRun pman(conf_man_para);
+  JadeRun prun(conf_man_para);
   JadeReadSP pread = std::make_shared<JadeRead>(conf_read_para);
   JadeFilterSP pflt = std::make_shared<JadeFilter>(conf_flt_para);
   JadeAnalysisSP pana = std::make_shared<JadeAnalysis>(conf_ana_para);
 
-  pman.SetReader(pread);
-  pman.SetFilter(pflt);
-  pman.SetAnalysis(pana);
+  prun.SetReader(pread);
+  prun.SetFilter(pflt);
+  prun.SetAnalysis(pana);
 
-  pman.DeviceConnect();
+  prun.DeviceConnect();
   std::cout << "=========start at " << get_now_str() << "=======" << std::endl;
-  pman.Run();
+  prun.Run();
   std::cout << "=========exit at " << get_now_str() << "=======" << std::endl;
-  pman.DeviceDisconnect();
+  prun.DeviceDisconnect();
   
   return 0;
 }

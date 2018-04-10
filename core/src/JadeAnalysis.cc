@@ -12,6 +12,7 @@ JadeAnalysis::JadeAnalysis(const JadeOption& opt)
   m_neigh_cut = m_opt.GetIntValue("NEIGHGBOR_CUT");
   m_clus_cut = m_opt.GetIntValue("CLUSTER_CUT");
   m_clus_size = m_opt.GetIntValue("CLUSTER_SIZE");
+  m_distance_cut = m_opt.GetFloatValue("DISTANCE_CUT");
   m_base_cut = m_opt.GetIntValue("BASE_CUT");
   m_base_numbers = m_opt.GetIntValue("BASE_NUMBERS");
   m_enable_raw_data_write = m_opt.GetBoolValue("ENABLE_RAW_DATA_WRITE");
@@ -29,13 +30,7 @@ void JadeAnalysis::Open()
   if (m_disable_file_write)
     return;
   std::string path = m_opt.GetStringValue("PATH");
-  std::time_t time_now = std::time(nullptr);
-  char time_buff[13];
-  time_buff[12] = 0;
-  std::strftime(time_buff, sizeof(time_buff),
-      "%y%m%d%H%M%S", std::localtime(&time_now));
-  std::string time_str(time_buff);
-  std::string data_path = path + "_" + time_str + ".root";
+  std::string data_path = path + ".root";
   m_fd = TFile::Open(data_path.c_str(), "RECREATE");
   if (!m_fd->IsOpen()) {
     std::cerr << "JadeAnalysis: Failed to open/create file: " << data_path << "\n";
@@ -45,6 +40,7 @@ void JadeAnalysis::Open()
   m_tree_adc->Branch("seed_adc", &m_output_seed_adc);
   m_tree_adc->Branch("cluster_adc", &m_output_clus_adc);
   m_tree_adc->Branch("base_adc", &m_output_base_adc);
+  m_tree_adc->Branch("pileup_counts", &m_output_pileup_counts);
   if (m_enable_raw_data_write) {
     m_tree_adc->Branch("cds_adc", &m_cds_adc);
     m_tree_adc->Branch("raw_adc", &m_raw_adc);
@@ -108,8 +104,15 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   m_clus->SetNeighbourTHR(m_neigh_cut);
   m_clus->SetClusterTHR(m_clus_cut);
   m_clus->SetClusterSize(m_clus_size);
+  m_clus->SetDistanceCut(m_distance_cut);
   m_clus->FindSeed();
+  m_clus->FindPileUp();
   m_clus->FindCluster();
+
+  auto pileup_counts = m_clus->GetPileUpCounts();
+  m_output_pileup_counts.clear();
+  if (pileup_counts > 0)
+    m_output_pileup_counts.push_back(pileup_counts);
 
   auto seed_adc = m_clus->GetSeedADC();
   //std::cout << "seed ADC: " << std::endl;

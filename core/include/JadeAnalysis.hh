@@ -30,6 +30,7 @@ class DLLEXPORT JadeAnalysis{
   JadeOption m_opt;
   size_t m_ev_print;
   size_t m_ev_n;
+  double m_distance_cut;
   int m_seed_cut;
   int m_neigh_cut;
   int m_clus_cut;
@@ -41,6 +42,7 @@ class DLLEXPORT JadeAnalysis{
   std::vector<int> m_output_seed_adc;
   std::vector<int> m_output_clus_adc;
   std::vector<int16_t> m_output_base_adc;
+  std::vector<int> m_output_pileup_counts;
   std::vector<std::pair<int, int>> m_hit;
   std::vector<int16_t> m_cds_adc;
   std::vector<int16_t> m_raw_adc;
