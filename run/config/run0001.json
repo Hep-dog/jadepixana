@@ -1,0 +1,40 @@
+{
+  "System":"JadeCore",
+  "JadeCore":{
+    "JadeRun":{
+      "type":"default",
+      "parameter":{
+        "something": "something"
+      }
+    },
+    "JadeRead":{
+      "type":"default",
+      "parameter":{
+        "PATH":"../data/raw_pixel/20180407/Sr_CHIPA1_180408115533.df"
+      }
+    },
+    "JadeAnalysis":{
+      "type":"default",
+      "parameter":{
+        "PATH":"./output/Sr_CHIPA1",
+        "DISABLE_FILE_WRITE":false,
+        "ENABLE_RAW_DATA_WRITE":false,
+        "ENABLE_HIT_MAP_WRITE":false,
+        "PRINT_EVENT_N": 10000,
+        "SEED_CUT":500,
+        "CLUSTER_CUT":500,
+        "NEIGHGBOR_CUT":200,
+        "BASE_CUT":100,
+        "BASE_NUMBERS":1000,
+        "CLUSTER_SIZE":3
+      }
+    },
+    "JadeFilter":{
+      "type":"default",
+      "parameter":{
+        "something": "somthing"
+      }
+    }
+  }
+}
+
