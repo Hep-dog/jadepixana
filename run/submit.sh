@@ -12,7 +12,7 @@ usage() {
     printf "\n\t%-5s\n" "./submit.sh [OPTION]"
     printf "\nOPTIONS\n"
     printf "\n\t%-9s  %-40s"  "0.1"      "[Run JadePix Analysis]" 
-    printf "\n\t%-9s  %-40s"  "0.1.1"    "Run Sr-90 ana" 
+    printf "\n\t%-9s  %-40s"  "0.1.1"    "Run Weak Fe ana" 
 }
 
 
@@ -33,7 +33,7 @@ case $option in
     0.1) echo "Simulating jadepix1..."
          ;;
     0.1.1) echo "Running jadepix1 conf files..."
-      RunTest -c config/run0001.json
+      python run.py 
       ;;
 
 esac

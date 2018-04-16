@@ -12,6 +12,10 @@ add_executable(RunTest src/RunTest.cxx)
 target_link_libraries(RunTest ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS RunTest)
 
+add_executable(AddTest src/AddTest.cxx)
+target_link_libraries(AddTest ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS AddTest)
+
 install(TARGETS ${INSTALL_TARGETS}
   DESTINATION bin
   LIBRARY DESTINATION lib
