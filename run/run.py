@@ -4,6 +4,7 @@ import subprocess
 import time
 import argparse
 import sys
+import os
 
 parser = argparse.ArgumentParser(description='JadePix Analysis')
 parser.add_argument('-s',
@@ -29,38 +30,53 @@ parser.add_argument('-c',
 
 ARGS = parser.parse_args()
 
-def main():
-    for i in range(ARGS.start, ARGS.end):
+def job_text():
+    try:
+        JADEPIXANA_DIR = os.environ["JADEPIXANA_DIR"]
+        JADEPIXANA_ENV_SHELL = os.environ["JADEPIXANA_ENV_SHELL"]
+    except KeyError:
+        print("Please set the environment variable JADEPIXANA_DIR \
+              JADEPIXANA_ENV_SHELL")
+        sys.exit(1)
 
+    text ='''
+#!/bin/bash
+
+cd {0}/run
+source {0}/etc/{1}
+RunTest -c config/run{2}.json
+'''.format(JADEPIXANA_DIR, JADEPIXANA_ENV_SHELL, str(ARGS.chip_number).zfill(5))
+
+    return text
+
+def gen_job(i):
+    job_file_name = "script/CHIPA" + str(ARGS.chip_number) \
+                        + "_job_" + str(i) + ".sh"
+    job_file = open(job_file_name,"w")
+    job_file.write(job_text())
+    job_file.close()
+
+    return job_file_name
+
+def sub_job(i, job_file):
+    job_cmd = "hep_sub -g atlas -o log/CHIPA"+ str(ARGS.chip_number) +"_run" + str(i).zfill(5) \
+        + ".log -e log/CHIPA" + str(ARGS.chip_number) + "_err" + str(i).zfill(5) + ".log " + job_file
+
+    print(job_cmd)
+    subprocess.call(job_cmd, shell=True)
+
+def run_sub_job():
+    for i in range(ARGS.start, ARGS.end):
       print("================== start >>>>>>>>>>\n")
 
-      job_file = "script/CHIPA" + str(ARGS.chip_number) + "_job_" + str(i) + ".sh"
-
-      copy_cmd = "cp job.sh " + job_file
-
-      subprocess.call(copy_cmd, shell=True)
-
-      cmd = "sed -n 5p " + job_file
-
-      str_cmd = str(subprocess.check_output(cmd, shell=True),'utf-8')
-
-      run_num = str_cmd.split()[-1].split("/")[-1].split(".")[-2]
-
-      rep_cmd = "sed -i 5s/" + run_num + "/CHIPA" + str(ARGS.chip_number) + "_run" + str(i).zfill(5) + "/g " + job_file
-
-      subprocess.call(rep_cmd, shell=True)
-
-      print(str(subprocess.check_output(cmd, shell=True),'utf-8'))
-
-      run_cmd = "hep_sub -g atlas -o log/CHIPA"+ str(ARGS.chip_number) +"_run" + str(i).zfill(5) \
-          + ".log -e log/CHIPA" + str(ARGS.chip_number) + "_err" + str(i).zfill(5) + ".log " + job_file
-
-      print(run_cmd)
-      subprocess.call(run_cmd, shell=True)
+      job_file = gen_job(i)
+      sub_job(i, job_file)
       time.sleep(1)
 
       print("\n<<<<<<<<<<<<<<<<<< end ==============\n\n")
 
+def main():
+    run_sub_job()
 
 if __name__ == "__main__":
     main()
