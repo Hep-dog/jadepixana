@@ -30,7 +30,7 @@ parser.add_argument('-c',
 
 ARGS = parser.parse_args()
 
-def job_text():
+def job_text(i):
     try:
         JADEPIXANA_DIR = os.environ["JADEPIXANA_DIR"]
         JADEPIXANA_ENV_SHELL = os.environ["JADEPIXANA_ENV_SHELL"]
@@ -44,8 +44,9 @@ def job_text():
 
 cd {0}/run
 source {0}/etc/{1}
-RunTest -c config/run{2}.json
-'''.format(JADEPIXANA_DIR, JADEPIXANA_ENV_SHELL, str(ARGS.chip_number).zfill(5))
+RunTest -c config/CHIPA{2}_run{3}.json
+'''.format(JADEPIXANA_DIR, JADEPIXANA_ENV_SHELL, \
+           str(ARGS.chip_number), str(i).zfill(5))
 
     return text
 
@@ -53,14 +54,17 @@ def gen_job(i):
     job_file_name = "script/CHIPA" + str(ARGS.chip_number) \
                         + "_job_" + str(i) + ".sh"
     job_file = open(job_file_name,"w")
-    job_file.write(job_text())
+    job_file.write(job_text(i))
     job_file.close()
+    subprocess.call("chmod u+x " + job_file_name, shell=True)
 
     return job_file_name
 
 def sub_job(i, job_file):
-    job_cmd = "hep_sub -g atlas -o log/CHIPA"+ str(ARGS.chip_number) +"_run" + str(i).zfill(5) \
-        + ".log -e log/CHIPA" + str(ARGS.chip_number) + "_err" + str(i).zfill(5) + ".log " + job_file
+    job_cmd = "hep_sub -g atlas -o /scratchfs/atlas/chenlj/jadepix/log/CHIPA" \
+        + str(ARGS.chip_number) +"_run" + str(i).zfill(5) \
+        + ".log -e  /scratchfs/atlas/chenlj/jadepix/log/CHIPA" \
+        + str(ARGS.chip_number) + "_err" + str(i).zfill(5) + ".log " + job_file
 
     print(job_cmd)
     subprocess.call(job_cmd, shell=True)
