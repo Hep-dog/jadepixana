@@ -5,7 +5,7 @@
       "type":"default",
       "parameter":{
         "something": "somthing",
-        "ENABLE_READ_FRAME_LIMITS":true,
+        "ENABLE_READ_FRAME_LIMITS":false,
         "READ_FRAME_NUMBERS": 40000
       }
     },
@@ -20,8 +20,8 @@
       "parameter":{
         "PATH":"/home/chenlj/jadepixana/data/test",
         "DISABLE_FILE_WRITE":false,
-        "ENABLE_RAW_DATA_WRITE":true,
-        "ENABLE_HIT_MAP_WRITE":true,
+        "ENABLE_RAW_DATA_WRITE":false,
+        "ENABLE_HIT_MAP_WRITE":false,
         "PRINT_EVENT_N": 10000,
         "SEED_CUT":500,
         "CLUSTER_CUT":500,
@@ -29,7 +29,7 @@
         "NEIGHGBOR_CUT":200,
         "BASE_CUT":100,
         "BASE_NUMBERS":1000,
-        "CLUSTER_SIZE":3
+        "CLUSTER_SIZE":5
       }
     },
     "JadeFilter":{

@@ -6,6 +6,7 @@
 #include "JadeCluster.hh"
 #include "JadeOption.hh"
 #include "TTree.h"
+#include "TH2.h"
 #include "TFile.h"
 
 #include <string>
@@ -38,7 +39,9 @@ class DLLEXPORT JadeAnalysis{
   int m_base_cut;
   int m_base_numbers;
   int m_base_count;
+  std::vector<size_t> m_output_clus_size;
   std::shared_ptr<TTree>m_tree_adc; 
+  std::shared_ptr<TH2D>m_hist2_clus_size_adc; 
   std::vector<int> m_output_seed_adc;
   std::vector<int> m_output_clus_adc;
   std::vector<int16_t> m_output_base_adc;

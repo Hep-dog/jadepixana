@@ -216,6 +216,7 @@ void JadeCluster::FindCluster()
     cluster _cluster;
 
     _cluster.total_adc = 0;
+    _cluster.size = 0;
 
     for (size_t iy = static_cast<size_t>(coord.second - m_size / 2.0);
          iy <= static_cast<size_t>(coord.second + m_size / 2.0); iy++)
@@ -234,9 +235,11 @@ void JadeCluster::FindCluster()
         _cluster.xCoord.push_back(ix);
         _cluster.yCoord.push_back(iy);
         _cluster.total_adc += GetPixelADC(ix, iy);
+        _cluster.size++;
 
         // mask pixel that other cluster can use it
-        SetPixelMask(ix, iy);
+        // pile up remove
+        //SetPixelMask(ix, iy);
       }
 
     if (_cluster.total_adc > m_cluster_thr) {
@@ -257,16 +260,26 @@ std::vector<JadeCluster::cluster> JadeCluster::GetCluster()
 
 std::vector<int16_t> JadeCluster::GetClusterADC()
 {
-  auto cluster = GetCluster();
-
   std::vector<int16_t> _cluster_adc;
 
   _cluster_adc.resize(m_cluster.size());
 
-  std::transform(cluster.begin(), cluster.end(), _cluster_adc.begin(),
+  std::transform(m_cluster.begin(), m_cluster.end(), _cluster_adc.begin(),
       [](auto& c) { return c.total_adc; });
 
   return _cluster_adc;
+}
+
+std::vector<size_t> JadeCluster::GetClusterSize()
+{
+  std::vector<size_t> _cluster_size;
+
+  _cluster_size.resize(m_cluster.size());
+
+  std::transform(m_cluster.begin(), m_cluster.end(), _cluster_size.begin(),
+      [](auto& c) { return c.size; });
+
+  return _cluster_size;
 }
 
 int JadeCluster::GetPileUpCounts()

@@ -28,6 +28,7 @@ class DLLEXPORT JadeCluster {
   void SetPixelMask(size_t x, size_t y);
   int16_t GetPixelADC(size_t x, size_t y);
   int16_t GetPixelADC(std::pair<size_t, size_t> coord);
+  std::vector<size_t> GetClusterSize();
   std::vector<int16_t> GetSeedADC();
   std::vector<int16_t> GetClusterADC();
   int GetPileUpCounts();
@@ -50,7 +51,9 @@ class DLLEXPORT JadeCluster {
     std::vector<size_t> yCoord;
     std::vector<int16_t> adc;
     int16_t total_adc;
+    size_t size;
   };
+
   std::vector<seed> GetSeed();
   std::vector<cluster> GetCluster();
 
