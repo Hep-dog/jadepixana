@@ -50,7 +50,7 @@ void JadeAnalysis::Open()
     m_tree_adc->Branch("hit_map", &m_hit);
   }
 
-  m_hist2_clus_size_adc = std::make_shared<TH2D>("clus_size_adc", "clus_size_adc", 5000, 0, 5000, m_clus_size*m_clus_size, 0, m_clus_size*m_clus_size);
+  m_hist2_clus_size_adc = std::make_shared<TH2D>("clus_size_adc", "clus_size_adc", 5000, 0, 5000, m_clus_size*m_clus_size, 1, m_clus_size*m_clus_size);
 }
 
 void JadeAnalysis::Reset()
