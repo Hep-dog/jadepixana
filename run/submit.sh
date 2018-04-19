@@ -33,7 +33,7 @@ case $option in
     0.1) echo "Simulating jadepix1..."
          ;;
     0.1.1) echo "Running jadepix1 conf files..."
-      python run.py 
+      ./run.py -c 1 -s 1 -e 41
       ;;
 
 esac
