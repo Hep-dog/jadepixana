@@ -20,6 +20,10 @@ add_executable(HistTest src/HistTest.cxx)
 target_link_libraries(HistTest ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS HistTest)
 
+add_executable(GenTest src/GenTest.cxx)
+target_link_libraries(GenTest ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS GenTest)
+
 install(TARGETS ${INSTALL_TARGETS}
   DESTINATION bin
   LIBRARY DESTINATION lib
