@@ -2,37 +2,60 @@
 #include <TFile.h>
 #include <TH1.h>
 #include <TTree.h>
+#include <TTreeReader.h>
 #include <iostream>
 #include <string>
 #include <vector>
 
-void GetHist(int istart, int iend, std::string in_path, TString out_path)
+void GetHist(int istart, int iend, int nbins, std::string in_path, std::string source_name, TString out_path)
 {
   auto output_file = new TFile(out_path, "RECREATE");
 
   for (int i = istart; i < iend; i++) {
 
     std::cout << "---------> " << i << " <------------" << std::endl;
-    TString infile_name = Form("%s/WeakFe_CHIPA%d.root", in_path.c_str(), i);
+    TString infile_name = Form("%s/%s_CHIPA%d.root", in_path.c_str(), source_name.c_str(), i);
 
     std::cout << "---------> Processing file " << infile_name << std::endl;
     auto fin = new TFile(infile_name);
     auto cluster_tree = dynamic_cast<TTree*>(fin->Get("clusters"));
+    auto nevents = cluster_tree->GetEntries();
 
-    TString seed_hist_name = Form("seed_hist_A%d",i);
-    cluster_tree->Draw("seed_adc >> hist_seed(5000,0,5000)");
-    auto seed_hist = dynamic_cast<TH1F*>(gDirectory->Get("hist_seed"));
-    seed_hist->SetName(seed_hist_name);
+    using IntVec = std::vector<int>;
+
+    TTreeReader theReader("clusters", fin);
+    TTreeReaderValue<IntVec> seedRV(theReader, "seed_adc");
+    TTreeReaderValue<IntVec> clusRV(theReader, "cluster_adc");
+
+    TString seed_hist_name = Form("seed_hist_A%d", i);
+    TString clus_hist_name = Form("cluster_hist_A%d", i);
+
+    auto seed_hist = new TH1F(seed_hist_name, seed_hist_name, nbins, 0, nbins);
+    auto clus_hist = new TH1F(clus_hist_name, clus_hist_name, nbins, 0, nbins);
+
+    int counts = 0;
+    while (theReader.Next()) {
+
+      if (counts % static_cast<int>(nevents * 0.02) == 0)
+        std::cout << "--------> "
+                  << std::setprecision(3) << std::fixed << counts * 100.0 / nevents
+                  << "% <--------" << std::endl;
+
+      auto seed = seedRV.Get();
+      for (auto& adc : *seed) {
+        seed_hist->Fill(adc);
+      }
+
+      auto clus = clusRV.Get();
+      for (auto& adc : *clus) {
+        clus_hist->Fill(adc);
+      }
+
+      counts++;
+    }
 
     output_file->cd();
     seed_hist->Write();
-
-    TString clus_hist_name = Form("cluster_hist_A%d",i);
-    cluster_tree->Draw("cluster_adc >> hist_clus(5000,0,5000)");
-    auto clus_hist = dynamic_cast<TH1F*>(gDirectory->Get("hist_clus"));
-    clus_hist->SetName(clus_hist_name);
-
-    output_file->cd();
     clus_hist->Write();
     fin->Close();
   }
@@ -55,9 +78,11 @@ int main(int argc, char** argv)
 
   std::string opt_start = "1";
   std::string opt_end = "2";
+  std::string opt_nbins = "5000";
   std::string opt_chip_number = "1";
   std::string opt_output_file = "WeakFe.root";
   std::string opt_in_path = "output";
+  std::string opt_source_name = "WeakFe";
 
   for (int i = 1; i < argc; i++) {
     std::string opt(argv[i]);
@@ -73,6 +98,12 @@ int main(int argc, char** argv)
         opt_end = argv[i];
       }
     }
+    if (opt == "-nb") {
+      if (i + 1 < argc) {
+        i++;
+        opt_nbins = argv[i];
+      }
+    }
     if (opt == "-i") {
       if (i + 1 < argc) {
         i++;
@@ -85,15 +116,23 @@ int main(int argc, char** argv)
         opt_output_file = argv[i];
       }
     }
+    if (opt == "-n") {
+      if (i + 1 < argc) {
+        i++;
+        opt_source_name = argv[i];
+      }
+    }
   }
 
   int start = static_cast<int>(std::stoul(opt_start));
   int end = static_cast<int>(std::stoul(opt_end));
+  int nbins = static_cast<int>(std::stoul(opt_nbins));
   int chip_number = static_cast<int>(std::stoul(opt_chip_number));
   TString output_file = opt_output_file;
   std::string in_path = opt_in_path;
+  std::string source_name = opt_source_name;
 
-  GetHist(start, end, in_path, output_file);
+  GetHist(start, end, nbins, in_path, source_name, output_file);
 
   std::cout << "File saved as: \n"
             << output_file << std::endl;
