@@ -85,16 +85,18 @@ int main(int argc, char** argv)
     auto infile = new TFile(infile_name);
 
     auto hin = dynamic_cast<TH2D*>(infile->Get("clus_size_adc_sum"));
+    auto sub_dir = output_file->mkdir(Form("clus_size_adc_A%d", i));
+    
     hin->SetName(Form("clus_size_adc_A%d", i));
 
     for (Int_t iBin = 1; iBin <= clus_size; iBin++) {
       auto hpr = dynamic_cast<TH1D*>(hin->ProjectionX("", iBin, iBin));
       hpr->SetName(Form("clus_size_adc_A%d_size%d", i, iBin));
-      output_file->cd();
+      sub_dir->cd();
       hpr->Write();
     }
 
-    output_file->cd();
+    sub_dir->cd();
     hin->Write();
     infile->Close();
   }
