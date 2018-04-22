@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-void AddTree(int istart, int iend, int chip_number, std::string in_path, TString out_path)
+void AddTree(int istart, int iend, int chip_number, std::string in_path, std::string source_name,TString out_path)
 {
   auto output_file = new TFile(out_path, "RECREATE");
   auto chain = std::make_shared<TChain>("clusters");
@@ -14,7 +14,7 @@ void AddTree(int istart, int iend, int chip_number, std::string in_path, TString
   for (int i = istart; i < iend; i++) {
 
     std::cout << "---------> " << i << " <------------" << std::endl;
-    TString infile_name = Form("%s/WeakFe_CHIPA%d_%d.root", in_path.c_str(), chip_number, i);
+    TString infile_name = Form("%s/%s_CHIPA%d_%d.root", in_path.c_str(), source_name.c_str(),chip_number, i);
 
     std::cout << "---------> Processing file " << infile_name << std::endl;
     chain->Add(infile_name);
@@ -56,6 +56,7 @@ int main(int argc, char** argv)
   std::string opt_chip_number = "1";
   std::string opt_output_file = "WeakFe.root";
   std::string opt_in_path = "output";
+  std::string opt_source_name = "WeakFe";
 
   for (int i = 1; i < argc; i++) {
     std::string opt(argv[i]);
@@ -83,6 +84,12 @@ int main(int argc, char** argv)
         opt_in_path = argv[i];
       }
     }
+    if (opt == "-n") {
+      if (i + 1 < argc) {
+        i++;
+        opt_source_name = argv[i];
+      }
+    }
     if (opt == "-o") {
       if (i + 1 < argc) {
         i++;
@@ -96,8 +103,9 @@ int main(int argc, char** argv)
   int chip_number = static_cast<int>(std::stoul(opt_chip_number));
   TString output_file = opt_output_file;
   std::string in_path = opt_in_path;
+  std::string source_name = opt_source_name;
 
-  AddTree(start, end, chip_number, in_path, output_file);
+  AddTree(start, end, chip_number, in_path, source_name, output_file);
 
   std::cout << "File saved as: \n"
             << output_file << std::endl;
