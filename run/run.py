@@ -28,6 +28,13 @@ parser.add_argument('-c',
                     type=int,
                     help='chip number')
 
+parser.add_argument('-n',
+                    action='store',
+                    dest='source_name',
+                    default=1,
+                    type=str,
+                    help='source_name')
+
 ARGS = parser.parse_args()
 
 def job_text(i):
@@ -40,19 +47,19 @@ def job_text(i):
         sys.exit(1)
 
     text ='''
-#!/bin/bash
+    #!/bin/bash
 
 cd {0}/run
 source {0}/etc/{1}
-RunTest -c config/CHIPA{2}_run{3}.json
+RunTest -c config/{2}_CHIPA{3}_run{4}.json
 '''.format(JADEPIXANA_DIR, JADEPIXANA_ENV_SHELL, \
-           str(ARGS.chip_number), str(i).zfill(5))
+           ARGS.source_name,str(ARGS.chip_number), str(i).zfill(5))
 
     return text
 
 def gen_job(i):
-    job_file_name = "script/CHIPA" + str(ARGS.chip_number) \
-                        + "_job_" + str(i) + ".sh"
+    job_file_name = "script/"+ARGS.source_name+"_CHIPA" + str(ARGS.chip_number) \
+        + "_job_" + str(i) + ".sh"
     job_file = open(job_file_name,"w")
     job_file.write(job_text(i))
     job_file.close()
@@ -61,9 +68,11 @@ def gen_job(i):
     return job_file_name
 
 def sub_job(i, job_file):
-    job_cmd = "hep_sub -g atlas -o /scratchfs/atlas/chenlj/jadepix/log/CHIPA" \
+    job_cmd = "hep_sub -g atlas -o /scratchfs/atlas/chenlj/jadepix/log/" \
+        + ARGS.source_name+"_CHIPA" \
         + str(ARGS.chip_number) +"_run" + str(i).zfill(5) \
-        + ".log -e  /scratchfs/atlas/chenlj/jadepix/log/CHIPA" \
+        + ".log -e  /scratchfs/atlas/chenlj/jadepix/log/" \
+        + ARGS.source_name+"_CHIPA" \
         + str(ARGS.chip_number) + "_err" + str(i).zfill(5) + ".log " + job_file
 
     print(job_cmd)
@@ -71,13 +80,11 @@ def sub_job(i, job_file):
 
 def run_sub_job():
     for i in range(ARGS.start, ARGS.end):
-      print("================== start >>>>>>>>>>\n")
-
-      job_file = gen_job(i)
-      sub_job(i, job_file)
-      time.sleep(1)
-
-      print("\n<<<<<<<<<<<<<<<<<< end ==============\n\n")
+        print("================== start >>>>>>>>>>\n")
+        job_file = gen_job(i)
+        sub_job(i, job_file)
+        time.sleep(1)
+        print("\n<<<<<<<<<<<<<<<<<< end ==============\n\n")
 
 def main():
     run_sub_job()
