@@ -331,6 +331,195 @@ WeakFe_CHIPA9_file_name = [
     ,"WeakFe_CHIPA9_180403170938.df"
 ]
 
+Sr_CHIPA1_file_name = [
+    "Sr_CHIPA1_180418224513.df"
+    ,"Sr_CHIPA1_180418224815.df"
+    ,"Sr_CHIPA1_180418225117.df"
+    ,"Sr_CHIPA1_180418225419.df"
+    ,"Sr_CHIPA1_180418225722.df"
+    ,"Sr_CHIPA1_180418230024.df"
+    ,"Sr_CHIPA1_180418230326.df"
+    ,"Sr_CHIPA1_180418230628.df"
+    ,"Sr_CHIPA1_180418230930.df"
+    ,"Sr_CHIPA1_180418231232.df"
+    ,"Sr_CHIPA1_180418231534.df"
+    ,"Sr_CHIPA1_180418231836.df"
+    ,"Sr_CHIPA1_180418232138.df"
+    ,"Sr_CHIPA1_180418232441.df"
+    ,"Sr_CHIPA1_180418232743.df"
+    ,"Sr_CHIPA1_180418233045.df"
+    ,"Sr_CHIPA1_180418233347.df"
+    ,"Sr_CHIPA1_180418233649.df"
+    ,"Sr_CHIPA1_180418233951.df"
+    ,"Sr_CHIPA1_180418234253.df"
+    ,"Sr_CHIPA1_180418234555.df"
+    ,"Sr_CHIPA1_180418234857.df"
+    ,"Sr_CHIPA1_180418235159.df"
+    ,"Sr_CHIPA1_180418235501.df"
+    ,"Sr_CHIPA1_180418235803.df"
+    ,"Sr_CHIPA1_180419000105.df"
+    ,"Sr_CHIPA1_180419000407.df"
+    ,"Sr_CHIPA1_180419000709.df"
+    ,"Sr_CHIPA1_180419001012.df"
+    ,"Sr_CHIPA1_180419001314.df"
+    ,"Sr_CHIPA1_180419001616.df"
+    ,"Sr_CHIPA1_180419001918.df"
+    ,"Sr_CHIPA1_180419002220.df"
+    ,"Sr_CHIPA1_180419002522.df"
+    ,"Sr_CHIPA1_180419002824.df"
+    ,"Sr_CHIPA1_180419003126.df"
+    ,"Sr_CHIPA1_180419003429.df"
+    ,"Sr_CHIPA1_180419003731.df"
+    ,"Sr_CHIPA1_180419004033.df"
+    ,"Sr_CHIPA1_180419004335.df"
+    ,"Sr_CHIPA1_180419004637.df"
+    ,"Sr_CHIPA1_180419004939.df"
+    ,"Sr_CHIPA1_180419005241.df"
+    ,"Sr_CHIPA1_180419005543.df"
+    ,"Sr_CHIPA1_180419005845.df"
+    ,"Sr_CHIPA1_180419010147.df"
+    ,"Sr_CHIPA1_180419010449.df"
+    ,"Sr_CHIPA1_180419010751.df"
+    ,"Sr_CHIPA1_180419011053.df"
+    ,"Sr_CHIPA1_180419011355.df"
+    ,"Sr_CHIPA1_180419011658.df"
+    ,"Sr_CHIPA1_180419012000.df"
+    ,"Sr_CHIPA1_180419012302.df"
+    ,"Sr_CHIPA1_180419012604.df"
+    ,"Sr_CHIPA1_180419012906.df"
+    ,"Sr_CHIPA1_180419013208.df"
+    ,"Sr_CHIPA1_180419013510.df"
+    ,"Sr_CHIPA1_180419013812.df"
+    ,"Sr_CHIPA1_180419014114.df"
+    ,"Sr_CHIPA1_180419014417.df"
+]
+
+Sr_CHIPA2_file_name = [
+    "Sr_CHIPA2_180418191810.df"
+    ,"Sr_CHIPA2_180418192112.df"
+    ,"Sr_CHIPA2_180418192414.df"
+    ,"Sr_CHIPA2_180418192716.df"
+    ,"Sr_CHIPA2_180418193018.df"
+    ,"Sr_CHIPA2_180418193320.df"
+    ,"Sr_CHIPA2_180418193623.df"
+    ,"Sr_CHIPA2_180418193925.df"
+    ,"Sr_CHIPA2_180418194227.df"
+    ,"Sr_CHIPA2_180418194529.df"
+    ,"Sr_CHIPA2_180418194831.df"
+    ,"Sr_CHIPA2_180418195133.df"
+    ,"Sr_CHIPA2_180418195435.df"
+    ,"Sr_CHIPA2_180418195737.df"
+    ,"Sr_CHIPA2_180418200039.df"
+    ,"Sr_CHIPA2_180418200341.df"
+    ,"Sr_CHIPA2_180418200643.df"
+    ,"Sr_CHIPA2_180418200945.df"
+    ,"Sr_CHIPA2_180418201247.df"
+    ,"Sr_CHIPA2_180418201549.df"
+    ,"Sr_CHIPA2_180418201852.df"
+    ,"Sr_CHIPA2_180418202154.df"
+    ,"Sr_CHIPA2_180418202456.df"
+    ,"Sr_CHIPA2_180418202758.df"
+    ,"Sr_CHIPA2_180418203100.df"
+    ,"Sr_CHIPA2_180418203402.df"
+    ,"Sr_CHIPA2_180418203704.df"
+    ,"Sr_CHIPA2_180418204006.df"
+    ,"Sr_CHIPA2_180418204309.df"
+    ,"Sr_CHIPA2_180418204611.df"
+    ,"Sr_CHIPA2_180418204913.df"
+    ,"Sr_CHIPA2_180418205215.df"
+    ,"Sr_CHIPA2_180418205517.df"
+    ,"Sr_CHIPA2_180418205819.df"
+    ,"Sr_CHIPA2_180418210121.df"
+    ,"Sr_CHIPA2_180418210423.df"
+    ,"Sr_CHIPA2_180418210725.df"
+    ,"Sr_CHIPA2_180418211027.df"
+    ,"Sr_CHIPA2_180418211329.df"
+    ,"Sr_CHIPA2_180418211631.df"
+    ,"Sr_CHIPA2_180418211933.df"
+    ,"Sr_CHIPA2_180418212235.df"
+    ,"Sr_CHIPA2_180418212538.df"
+    ,"Sr_CHIPA2_180418212840.df"
+    ,"Sr_CHIPA2_180418213142.df"
+    ,"Sr_CHIPA2_180418213444.df"
+    ,"Sr_CHIPA2_180418213746.df"
+    ,"Sr_CHIPA2_180418214048.df"
+    ,"Sr_CHIPA2_180418214350.df"
+    ,"Sr_CHIPA2_180418214652.df"
+    ,"Sr_CHIPA2_180418214954.df"
+    ,"Sr_CHIPA2_180418215256.df"
+    ,"Sr_CHIPA2_180418215559.df"
+    ,"Sr_CHIPA2_180418215901.df"
+    ,"Sr_CHIPA2_180418220203.df"
+    ,"Sr_CHIPA2_180418220505.df"
+    ,"Sr_CHIPA2_180418220807.df"
+    ,"Sr_CHIPA2_180418221109.df"
+    ,"Sr_CHIPA2_180418221411.df"
+    ,"Sr_CHIPA2_180418221713.df"
+]
+
+Sr_CHIPA3_file_name = [
+    "Sr_CHIPA3_180418161027.df"
+    ,"Sr_CHIPA3_180418161329.df"
+    ,"Sr_CHIPA3_180418161631.df"
+    ,"Sr_CHIPA3_180418161933.df"
+    ,"Sr_CHIPA3_180418162235.df"
+    ,"Sr_CHIPA3_180418162537.df"
+    ,"Sr_CHIPA3_180418162839.df"
+    ,"Sr_CHIPA3_180418163141.df"
+    ,"Sr_CHIPA3_180418163443.df"
+    ,"Sr_CHIPA3_180418163745.df"
+    ,"Sr_CHIPA3_180418164047.df"
+    ,"Sr_CHIPA3_180418164349.df"
+    ,"Sr_CHIPA3_180418164651.df"
+    ,"Sr_CHIPA3_180418164953.df"
+    ,"Sr_CHIPA3_180418165256.df"
+    ,"Sr_CHIPA3_180418165558.df"
+    ,"Sr_CHIPA3_180418165900.df"
+    ,"Sr_CHIPA3_180418170202.df"
+    ,"Sr_CHIPA3_180418170504.df"
+    ,"Sr_CHIPA3_180418170806.df"
+    ,"Sr_CHIPA3_180418171108.df"
+    ,"Sr_CHIPA3_180418171410.df"
+    ,"Sr_CHIPA3_180418171712.df"
+    ,"Sr_CHIPA3_180418172014.df"
+    ,"Sr_CHIPA3_180418172316.df"
+    ,"Sr_CHIPA3_180418172618.df"
+    ,"Sr_CHIPA3_180418172921.df"
+    ,"Sr_CHIPA3_180418173223.df"
+    ,"Sr_CHIPA3_180418173525.df"
+    ,"Sr_CHIPA3_180418173827.df"
+    ,"Sr_CHIPA3_180418174129.df"
+    ,"Sr_CHIPA3_180418174431.df"
+    ,"Sr_CHIPA3_180418174733.df"
+    ,"Sr_CHIPA3_180418175035.df"
+    ,"Sr_CHIPA3_180418175337.df"
+    ,"Sr_CHIPA3_180418175639.df"
+    ,"Sr_CHIPA3_180418175941.df"
+    ,"Sr_CHIPA3_180418180243.df"
+    ,"Sr_CHIPA3_180418180546.df"
+    ,"Sr_CHIPA3_180418180848.df"
+    ,"Sr_CHIPA3_180418181150.df"
+    ,"Sr_CHIPA3_180418181452.df"
+    ,"Sr_CHIPA3_180418181754.df"
+    ,"Sr_CHIPA3_180418182056.df"
+    ,"Sr_CHIPA3_180418182358.df"
+    ,"Sr_CHIPA3_180418182700.df"
+    ,"Sr_CHIPA3_180418183003.df"
+    ,"Sr_CHIPA3_180418183305.df"
+    ,"Sr_CHIPA3_180418183607.df"
+    ,"Sr_CHIPA3_180418183909.df"
+    ,"Sr_CHIPA3_180418184211.df"
+    ,"Sr_CHIPA3_180418184513.df"
+    ,"Sr_CHIPA3_180418184815.df"
+    ,"Sr_CHIPA3_180418185117.df"
+    ,"Sr_CHIPA3_180418185419.df"
+    ,"Sr_CHIPA3_180418185721.df"
+    ,"Sr_CHIPA3_180418190023.df"
+    ,"Sr_CHIPA3_180418190325.df"
+    ,"Sr_CHIPA3_180418190627.df"
+    ,"Sr_CHIPA3_180418190929.df"
+]
+
 parser = argparse.ArgumentParser(description='JadePix Analysis Config')
 parser.add_argument('-s',
                     action='store',
@@ -353,11 +542,25 @@ parser.add_argument('-c',
                     type=int,
                     help='chip number')
 
+parser.add_argument('-n',
+                    action='store',
+                    dest='source_name',
+                    default="WeakFe",
+                    type=str,
+                    help='source_name')
+
+parser.add_argument('-t',
+                    action='store',
+                    dest='template_json',
+                    default="WeakFe",
+                    type=str,
+                    help='template_json')
+
 ARGS = parser.parse_args()
 
-def get_file_name(chip_number):
-    infile_name = "WeakFe_CHIPA"+ str(chip_number) +"_file_name"
-    outfile_name = "WeakFe_CHIPA" + str(chip_number)
+def get_file_name(source_name,chip_number):
+    infile_name = source_name+"_CHIPA"+ str(chip_number) +"_file_name"
+    outfile_name = source_name+"_CHIPA" + str(chip_number)
     return [infile_name, outfile_name]
 
 def gen_config():
@@ -366,13 +569,13 @@ def gen_config():
 
       print("================== start >>>>>>>>>>\n")
 
-      config_file = "config/CHIPA" + str(ARGS.chip_number) + "_run" + str(i).zfill(5) + ".json"
+      config_file = "config/"+ARGS.source_name+"_CHIPA" + str(ARGS.chip_number) + "_run" + str(i).zfill(5) + ".json"
 
-      copy_cmd = "cp config/CHIPA" + str(ARGS.chip_number) + "_run00001.json " + config_file
+      copy_cmd = "cp "+ARGS.template_json+" "+ config_file
 
       subprocess.call(copy_cmd, shell=True)
 
-      file_name = get_file_name(ARGS.chip_number)
+      file_name = get_file_name(ARGS.source_name,ARGS.chip_number)
       in_file_name = globals()[file_name[0]]
       out_file_name = file_name[1]
 
@@ -404,7 +607,7 @@ def gen_config():
 
       print(str(subprocess.check_output(out_cmd, shell=True),'utf-8'))
 
-      time.sleep(1)
+      time.sleep(0.1)
 
       print("\n<<<<<<<<<<<<<<<<<< end ==============\n\n")
 
