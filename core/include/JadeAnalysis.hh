@@ -39,6 +39,7 @@ class DLLEXPORT JadeAnalysis{
   int m_base_cut;
   int m_base_numbers;
   int m_base_count;
+  int m_hist_nbins;
   std::vector<size_t> m_output_clus_size;
   std::shared_ptr<TTree>m_tree_adc; 
   std::shared_ptr<TH2D>m_hist2_clus_size_adc; 

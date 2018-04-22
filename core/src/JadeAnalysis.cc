@@ -17,6 +17,7 @@ JadeAnalysis::JadeAnalysis(const JadeOption& opt)
   m_base_numbers = m_opt.GetIntValue("BASE_NUMBERS");
   m_enable_raw_data_write = m_opt.GetBoolValue("ENABLE_RAW_DATA_WRITE");
   m_enable_hit_map_write = m_opt.GetBoolValue("ENABLE_HIT_MAP_WRITE");
+  m_hist_nbins = m_opt.GetIntValue("HIST_NBINS");
 }
 
 JadeAnalysis::~JadeAnalysis()
@@ -50,7 +51,7 @@ void JadeAnalysis::Open()
     m_tree_adc->Branch("hit_map", &m_hit);
   }
 
-  m_hist2_clus_size_adc = std::make_shared<TH2D>("clus_size_adc", "clus_size_adc", 5000, 0, 5000, m_clus_size*m_clus_size, 1, m_clus_size*m_clus_size);
+  m_hist2_clus_size_adc = std::make_shared<TH2D>("clus_size_adc", "clus_size_adc", m_hist_nbins, 0, m_hist_nbins, m_clus_size*m_clus_size, 1, m_clus_size*m_clus_size);
 }
 
 void JadeAnalysis::Reset()
