@@ -97,19 +97,13 @@ uint32_t JadeDataFrame::GetTriggerSerialOrder() const
 void JadeDataFrame::Decode()
 {
   m_is_decoded = true;
-  if (m_data_raw.size() <= 4) {
-    std::cerr << "JadeDataFrame: no length word\n";
+  if(m_data_raw.size() != 1928+4){
+    std::cerr<<"JadeDataFrame: unable to decode\n";
     throw;
   }
   const char* p_raw = m_data_raw.data();
   size_t p_offset = 0;
-  uint32_t len_raw = LE32TOH(*reinterpret_cast<const uint32_t*>(p_raw + p_offset));
-  if (len_raw != m_data_raw.size()) {
-    std::cerr << "JadeDataFrame: raw data length does not match\n";
-    throw;
-  }
-  p_offset += 4;
-
+  
   m_n_x = 16;
   m_n_y = 48;
   m_data.clear();
