@@ -71,6 +71,7 @@ void JadeAnalysis::Close()
   if (m_fd->IsOpen()) {
     m_tree_adc->Write();
     m_hist2_clus_size_adc->Write();
+    m_hist_serial_order_counts->Write();
     m_fd->Close();
   }
 }
