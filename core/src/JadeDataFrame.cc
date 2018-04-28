@@ -11,7 +11,6 @@ JadeDataFrame::JadeDataFrame(std::string&& data)
     , m_offset_y(0)
     , m_n_x(0)
     , m_n_y(0)
-    , m_cds_frame_adc({ 0 })
 {
 }
 
@@ -22,7 +21,6 @@ JadeDataFrame::JadeDataFrame(const std::string& data)
     , m_offset_y(0)
     , m_n_x(0)
     , m_n_y(0)
-    , m_cds_frame_adc({ 0 })
 {
 }
 
@@ -32,19 +30,8 @@ JadeDataFrame::JadeDataFrame(size_t nraw)
     , m_offset_y(0)
     , m_n_x(0)
     , m_n_y(0)
-    , m_cds_frame_adc({ 0 })
 {
   m_data_raw.resize(nraw);
-}
-
-JadeDataFrame::JadeDataFrame()
-    : m_is_decoded(false)
-    , m_offset_x(0)
-    , m_offset_y(0)
-    , m_n_x(0)
-    , m_n_y(0)
-    , m_cds_frame_adc({ 0 })
-{
 }
 
 JadeDataFrame::~JadeDataFrame()
@@ -102,25 +89,43 @@ uint32_t JadeDataFrame::GetMatrixSizeY() const
   return m_n_y;
 }
 
+uint32_t JadeDataFrame::GetTriggerSerialOrder() const
+{
+  return m_trigger_n;
+}
+
 void JadeDataFrame::Decode()
 {
   m_is_decoded = true;
-  if (m_data_raw.size() != 1928) {
-    std::cerr << "JadeDataFrame: unable to decode\n";
+  if (m_data_raw.size() <= 4) {
+    std::cerr << "JadeDataFrame: no length word\n";
     throw;
   }
+  const char* p_raw = m_data_raw.data();
+  size_t p_offset = 0;
+  uint32_t len_raw = LE32TOH(*reinterpret_cast<const uint32_t*>(p_raw + p_offset));
+  if (len_raw != m_data_raw.size()) {
+    std::cerr << "JadeDataFrame: raw data length does not match\n";
+    throw;
+  }
+  p_offset += 4;
+
   m_n_x = 16;
   m_n_y = 48;
   m_data.clear();
   m_data.resize(m_n_x * m_n_y, 0);
-  const char* p_raw = m_data_raw.data();
-  size_t p_offset = 0;
+
   uint64_t header32 = LE32TOH(*reinterpret_cast<const uint32_t*>(p_raw + p_offset));
   if (header32 != 0xaaaaaaaa) {
     std::cerr << "JadeDataFrame: data frame header is incorrect\n";
     throw;
   }
   p_offset += 4;
+  m_trigger_n = LE16TOH(*reinterpret_cast<const uint16_t*>(p_raw + p_offset));
+  p_offset += 2;
+  m_extension = LE16TOH(*reinterpret_cast<const uint16_t*>(p_raw + p_offset));
+  p_offset += 2;
+
   int16_t* p_data = m_data.data();
   bool is_first_row = true;
   for (size_t yn = 0; yn < m_n_y; yn++) {
@@ -154,17 +159,17 @@ void JadeDataFrame::Decode()
   return;
 }
 
-bool JadeDataFrame::IsInMatrix(size_t x, size_t y) const
+bool JadeDataFrame::IsInEdge(size_t x, size_t y) const
 {
-  if (x - m_offset_x < m_n_x && y - m_offset_y < m_n_y && x >= m_offset_x && y >= m_offset_y)
+  if (x - m_offset_x == m_n_x && y - m_offset_y == m_n_y && x == m_offset_x && y == m_offset_y)
     return true;
   else
     return false;
 }
 
-bool JadeDataFrame::IsInEdge(size_t x, size_t y) const
+bool JadeDataFrame::IsInMatrix(size_t x, size_t y) const
 {
-  if (x - m_offset_x == m_n_x && y - m_offset_y == m_n_y && x == m_offset_x && y == m_offset_y)
+  if (x - m_offset_x < m_n_x && y - m_offset_y < m_n_y && x >= m_offset_x && y >= m_offset_y)
     return true;
   else
     return false;

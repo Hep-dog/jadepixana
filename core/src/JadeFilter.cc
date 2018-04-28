@@ -5,6 +5,7 @@ using namespace std::chrono_literals;
 JadeFilter::JadeFilter(const JadeOption& opt)
     : m_opt(opt)
     , m_ev_n(0)
+    , m_trigger_serial_orider(0)
     , m_last_df({ 0 })
 {
 }
@@ -23,7 +24,9 @@ JadeDataFrameSP JadeFilter::Filter(JadeDataFrameSP df)
 
   JadeDataFrameSP cds_df;
 
-  if (m_ev_n == 1) {
+  m_trigger_serial_orider = df->GetTriggerSerialOrder();
+
+  if (m_trigger_serial_orider == 0) {
     m_last_df = df;
   } else {
     cds_df = std::make_shared<JadeDataFrame>(*df - *m_last_df);

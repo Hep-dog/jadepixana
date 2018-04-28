@@ -18,6 +18,7 @@ JadeAnalysis::JadeAnalysis(const JadeOption& opt)
   m_enable_raw_data_write = m_opt.GetBoolValue("ENABLE_RAW_DATA_WRITE");
   m_enable_hit_map_write = m_opt.GetBoolValue("ENABLE_HIT_MAP_WRITE");
   m_hist_nbins = m_opt.GetIntValue("HIST_NBINS");
+  m_serial_orders = m_opt.GetIntValue("SERIAL_ORDERS");
 }
 
 JadeAnalysis::~JadeAnalysis()
@@ -51,7 +52,10 @@ void JadeAnalysis::Open()
     m_tree_adc->Branch("hit_map", &m_hit);
   }
 
-  m_hist2_clus_size_adc = std::make_shared<TH2D>("clus_size_adc", "clus_size_adc", m_hist_nbins, 0, m_hist_nbins, m_clus_size*m_clus_size, 1, m_clus_size*m_clus_size);
+  m_hist2_clus_size_adc = std::make_shared<TH2D>("clus_size_adc", "clus_size_adc",
+      m_hist_nbins, 0, m_hist_nbins, m_clus_size * m_clus_size, 1, m_clus_size * m_clus_size);
+  m_hist_serial_order_counts = std::make_shared<TH1D>("serial_order_counts", "serial_order_counts",
+      m_serial_orders, 0, m_serial_orders);
 }
 
 void JadeAnalysis::Reset()
@@ -81,8 +85,9 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   if (m_disable_file_write)
     return;
 
-  //Process odd frame
-  if ((m_ev_n) == 0) {
+  m_trigger_serial_order = df->GetTriggerSerialOrder();
+
+  if (m_trigger_serial_order == 0) {
     m_ev_n++;
     return;
   }
@@ -166,6 +171,10 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
 
   for (int i = 0; i < clus_adc.size(); i++) {
     m_hist2_clus_size_adc->Fill(clus_adc.at(i), clus_size.at(i));
+  };
+
+  for (int i = 0; i < clus_adc.size(); i++) {
+    m_hist_serial_order_counts->Fill(m_trigger_serial_order);
   };
 
   m_ev_n++;

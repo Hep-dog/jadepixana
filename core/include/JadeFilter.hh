@@ -15,6 +15,7 @@ class DLLEXPORT JadeFilter {
   private:
   JadeOption m_opt;
   JadeDataFrameSP m_last_df;
+  uint32_t m_trigger_serial_orider;
   size_t m_ev_n;
 };
 

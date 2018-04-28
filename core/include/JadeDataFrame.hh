@@ -2,20 +2,20 @@
 #define JADEPIX_JADEDATAFRAME
 
 #include "JadeSystem.hh"
+
 #include <string>
 #include <vector>
+#include <chrono>
 #include <map>
 #include <algorithm>
 #include <functional>
-#include <chrono>
-
 
 class DLLEXPORT JadeDataFrame{
  public:
   JadeDataFrame(const std::string &data);
   JadeDataFrame(std::string &&data);
   JadeDataFrame(size_t nraw);
-  JadeDataFrame();
+  JadeDataFrame() = delete;
   virtual ~JadeDataFrame();
   virtual void Decode();
   std::string& RawDataString();
@@ -31,8 +31,8 @@ class DLLEXPORT JadeDataFrame{
   uint32_t GetMatrixHighY() const;
   uint32_t GetMatrixSizeX() const;
   uint32_t GetMatrixSizeY() const;
+  uint32_t GetTriggerSerialOrder() const;
   void Print(std::ostream& os, size_t ws = 0) const;
-
   bool IsInEdge(size_t x, size_t y) const;
   std::vector<int16_t> GetFrameCDS();
   JadeDataFrame operator-(JadeDataFrame &df);
@@ -42,6 +42,8 @@ class DLLEXPORT JadeDataFrame{
   std::string m_data_raw;
   std::string m_description;
   std::chrono::system_clock::time_point m_ts;
+  uint32_t m_trigger_n;
+  uint16_t m_extension;
   uint32_t m_frame_n;
   uint16_t m_offset_x;
   uint16_t m_offset_y;
