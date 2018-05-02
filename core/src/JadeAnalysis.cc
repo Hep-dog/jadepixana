@@ -98,7 +98,7 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   if (m_base_count < m_base_numbers) {
     auto cds_adc = df->GetFrameCDS();
     if (std::none_of(cds_adc.begin(), cds_adc.end(),
-            [=](auto& cds) { return cds > m_base_cut ? true : false; })) {
+            [=](auto& cds) { return abs(cds) > m_base_cut ? true : false; })) {
       m_output_base_adc.swap(cds_adc);
       m_base_count++;
     }
