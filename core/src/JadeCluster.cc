@@ -4,33 +4,33 @@
 #pragma comment(lib, "Ws2_32.lib")
 #endif
 
-  JadeCluster::JadeCluster()
-  : m_offset_x(0)
-  , m_offset_y(0)
-  , m_n_x(0)
-  , m_n_y(0)
+JadeCluster::JadeCluster()
+    : m_offset_x(0)
+    , m_offset_y(0)
+    , m_n_x(0)
+    , m_n_y(0)
     , m_frame_adc({ 0 })
-, m_pixel_can_be_used({ true })
-  , m_seed_thr(0)
-  , m_cluster_thr(0)
-  , m_neigh_thr(0)
-  , m_size(0)
-  , m_fix_size(5)
-  , m_distance_cut(3)
-, m_is_seed_find(false)
+    , m_pixel_can_be_used({ true })
+    , m_seed_thr(0)
+    , m_cluster_thr(0)
+    , m_neigh_thr(0)
+    , m_size(0)
+    , m_fix_size(5)
+    , m_distance_cut(3)
+    , m_is_seed_find(false)
 {
 }
 
-  JadeCluster::JadeCluster(JadeDataFrameSP df)
-  : m_offset_y(0)
+JadeCluster::JadeCluster(JadeDataFrameSP df)
+    : m_offset_y(0)
     , m_pixel_can_be_used({ true })
-  , m_seed_thr(0)
-  , m_cluster_thr(0)
-  , m_neigh_thr(0)
-  , m_size(0)
-  , m_distance_cut(3)
-  , m_is_seed_find(false)
-, m_is_cluster_find(false)
+    , m_seed_thr(0)
+    , m_cluster_thr(0)
+    , m_neigh_thr(0)
+    , m_size(0)
+    , m_distance_cut(3)
+    , m_is_seed_find(false)
+    , m_is_cluster_find(false)
 {
   m_offset_x = df->GetMatrixLowX();
   m_offset_y = df->GetMatrixLowY();
@@ -149,11 +149,11 @@ void JadeCluster::FindPileUp()
 {
   auto _seed = m_seed;
   m_seed.erase(std::remove_if(m_seed.begin(), m_seed.end(),
-        [=](auto& s1) {
-        return std::count_if(_seed.begin(), _seed.end(),
-            [&s1, this](auto& s2) { return this->GetDistance(s1.coord, s2.coord) < m_distance_cut; })
-        > 1;
-        }),
+                   [=](auto& s1) {
+                     return std::count_if(_seed.begin(), _seed.end(),
+                                [&s1, this](auto& s2) { return this->GetDistance(s1.coord, s2.coord) < m_distance_cut; })
+                         > 1;
+                   }),
       m_seed.end());
 
   m_pileup_counts = _seed.size() - m_seed.size();
@@ -166,18 +166,23 @@ double JadeCluster::GetDistance(std::pair<size_t, size_t> p1, std::pair<size_t, 
   return std::sqrt(x * x + y * y);
 }
 
-std::vector<std::pair<size_t, size_t> > JadeCluster::GetSeedCoord()
+void JadeCluster::FindSeedCoord()
 {
   if (!m_is_seed_find)
     FindSeed();
 
-  std::vector<std::pair<size_t, size_t> > _seed_coord;
+  std::vector<std::pair<size_t, size_t>> _seed_coord;
 
   _seed_coord.resize(m_seed.size());
 
   std::transform(m_seed.begin(), m_seed.end(), _seed_coord.begin(), [](auto& s) { return s.coord; });
 
-  return _seed_coord;
+  m_seed_coord = _seed_coord;
+}
+
+std::vector<std::pair<size_t, size_t>> JadeCluster::GetSeedCoord()
+{
+  return m_seed_coord;
 }
 
 int16_t JadeCluster::GetPixelADC(std::pair<size_t, size_t> coord)
@@ -222,11 +227,10 @@ void JadeCluster::FindFixWindowCluster()
     _cluster.total_adc = 0;
     _cluster.size = 0;
 
-
     for (size_t iy = static_cast<size_t>(coord.second - m_fix_size / 2.0);
-        iy < static_cast<size_t>(coord.second + m_fix_size / 2.0); iy++)
+         iy < static_cast<size_t>(coord.second + m_fix_size / 2.0); iy++)
       for (size_t ix = static_cast<size_t>(coord.first - m_fix_size / 2.0);
-          ix < static_cast<size_t>(coord.first + m_fix_size / 2.0); ix++) {
+           ix < static_cast<size_t>(coord.first + m_fix_size / 2.0); ix++) {
 
         // skip pixel outside and in the edge
         if (!IsInMatrix(ix, iy) || IsInEdge(ix, iy))
@@ -259,16 +263,16 @@ void JadeCluster::FindCluster()
     _cluster.size = 0;
 
     for (size_t iy = static_cast<size_t>(coord.second - m_size / 2.0);
-        iy <= static_cast<size_t>(coord.second + m_size / 2.0); iy++)
+         iy <= static_cast<size_t>(coord.second + m_size / 2.0); iy++)
       for (size_t ix = static_cast<size_t>(coord.first - m_size / 2.0);
-          ix <= static_cast<size_t>(coord.first + m_size / 2.0); ix++) {
+           ix <= static_cast<size_t>(coord.first + m_size / 2.0); ix++) {
 
         // skip pixel outside and in the edge
         if (!IsInMatrix(ix, iy) || IsInEdge(ix, iy))
           continue;
 
         // mask pixels that cannot pass neighbour threshold
-        if (GetPixelADC(ix,iy) < m_neigh_thr) {
+        if (GetPixelADC(ix, iy) < m_neigh_thr) {
           SetPixelMask(ix, iy);
         }
 
@@ -331,19 +335,18 @@ std::vector<std::vector<int16_t>> JadeCluster::GetNPixelsADC()
 {
   std::vector<std::vector<int16_t>> _npixels_adc;
 
-  if (! m_fix_window_cluster.empty()){
-    for(auto& clus : m_fix_window_cluster){
+  if (!m_fix_window_cluster.empty()) {
+    for (auto& clus : m_fix_window_cluster) {
 
       std::vector<int16_t> npix_adc;
-      npix_adc.reserve(m_fix_size*m_fix_size);
+      npix_adc.reserve(m_fix_size * m_fix_size);
 
       std::sort(clus.adc.begin(), clus.adc.end(),
-          [](auto& a1, auto& a2) { return (a1>=a2); });
+          [](auto& a1, auto& a2) { return (a1 >= a2); });
 
-      int16_t pixels_adc=0;
+      int16_t pixels_adc = 0;
 
-      for(auto& adc : clus.adc)
-      {
+      for (auto& adc : clus.adc) {
         pixels_adc += adc;
         npix_adc.push_back(pixels_adc);
       }
@@ -371,9 +374,9 @@ int JadeCluster::GetPileUpCounts()
   return m_pileup_counts;
 }
 
-std::vector<std::pair<double, double> > JadeCluster::GetCenterOfGravity()
+std::vector<std::pair<double, double>> JadeCluster::GetCenterOfGravity()
 {
-  std::vector<std::pair<double, double> > _center;
+  std::vector<std::pair<double, double>> _center;
   auto xCenter = GetXCenterOfGravity();
   auto yCenter = GetYCenterOfGravity();
 

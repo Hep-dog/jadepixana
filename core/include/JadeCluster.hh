@@ -37,6 +37,7 @@ class DLLEXPORT JadeCluster {
     int GetPileUpCounts();
     double GetDistance(std::pair<size_t, size_t> p1, std::pair<size_t, size_t> p2);
     virtual void FindSeed();
+    virtual void FindSeedCoord();
     virtual void FindPileUp();
     virtual void FindCluster();
     virtual void FindFixWindowCluster();
@@ -77,6 +78,7 @@ class DLLEXPORT JadeCluster {
     std::vector<seed> m_seed;
     std::vector<cluster> m_cluster;
     std::vector<cluster> m_fix_window_cluster;
+    std::vector<std::pair<size_t, size_t>> m_seed_coord;
 
     bool m_is_seed_find;
     bool m_is_cluster_find;
