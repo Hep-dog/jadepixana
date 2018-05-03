@@ -33,7 +33,7 @@ class DLLEXPORT JadeCluster {
     std::vector<int16_t> GetSeedADC();
     std::vector<int16_t> GetClusterADC();
     std::vector<int16_t> GetFixWindowClusterADC();
-    std::vector<std::vector<int16_t>> GetNPixelsADC();
+    std::vector< std::vector<int16_t> > GetNPixelsADC();
     int GetPileUpCounts();
     double GetDistance(std::pair<size_t, size_t> p1, std::pair<size_t, size_t> p2);
     virtual void FindSeed();
@@ -55,12 +55,14 @@ class DLLEXPORT JadeCluster {
       std::vector<size_t> xCoord;
       std::vector<size_t> yCoord;
       std::vector<int16_t> adc;
+      std::vector<int16_t> npix_adc;
       int16_t total_adc;
       size_t size;
     };
 
     std::vector<seed> GetSeed();
     std::vector<cluster> GetCluster();
+    std::vector<cluster> GetFixWindowCluster();
 
   private:
     uint16_t m_offset_x;
@@ -82,6 +84,7 @@ class DLLEXPORT JadeCluster {
 
     bool m_is_seed_find;
     bool m_is_cluster_find;
+    bool m_is_fix_cluster_find;
     int m_pileup_counts;
 };
 

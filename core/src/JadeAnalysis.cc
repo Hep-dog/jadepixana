@@ -63,8 +63,9 @@ void JadeAnalysis::Open()
   m_hist_clus_adc = std::make_shared<TH1D>("clus_adc","clus_adc",m_hist_nbins,0,m_hist_nbins);
 
   if (m_enable_fix_window_clus_write){
-    m_hist2_clus_fix_adc = std::make_shared<TH2D>(Form("npixels_cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size),Form("npixels_cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size),m_clus_fix_size*m_clus_fix_size,0,m_clus_fix_size*m_clus_fix_size,m_hist_nbins,0,m_hist_nbins);
-    //m_hist_clus_fix_adc = std::make_shared<TH1D>(Form("cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size),Form("cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size),m_hist_nbins,0,m_hist_nbins);
+    TString hist_name = Form("npixels_cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size);
+    m_hist2_clus_fix_adc = std::make_shared<TH2D>(hist_name,hist_name,m_clus_fix_size*m_clus_fix_size,0,m_clus_fix_size*m_clus_fix_size,m_hist_nbins,0,m_hist_nbins);
+    m_hist_clus_fix_adc = std::make_shared<TH1D>(Form("cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size),Form("cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size),m_hist_nbins,0,m_hist_nbins);
   }
 }
 
@@ -88,7 +89,7 @@ void JadeAnalysis::Close()
     if(m_enable_fix_window_clus_write)
     {
       m_hist2_clus_fix_adc->Write();
-      //m_hist_clus_fix_adc->Write();
+      m_hist_clus_fix_adc->Write();
     }
     m_fd->Close();
   }
@@ -136,6 +137,7 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   m_clus->SetDistanceCut(m_distance_cut);
   m_clus->FindSeed();
   m_clus->FindPileUp();
+  m_clus->FindSeedCoord();
   m_clus->FindCluster();
 
   if(m_enable_fix_window_clus_write){
@@ -183,13 +185,13 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
 
   if (m_enable_fix_window_clus_write) {
     //std::cout << "cluster ADC: " << std::endl;
-    //auto clus_fix_adc = m_clus->GetFixWindowClusterADC();
-    //m_output_clus_fix_adc.clear();
-    //for (auto& adc : clus_fix_adc) {
-    //  //std::cout << '\t' << adc;
-    //  m_output_clus_fix_adc.push_back(adc);
-    //  m_hist_clus_fix_adc->Fill(adc);
-    //}
+    auto clus_fix_adc = m_clus->GetFixWindowClusterADC();
+    m_output_clus_fix_adc.clear();
+    for (auto& adc : clus_fix_adc) {
+      //std::cout << '\t' << adc;
+      m_output_clus_fix_adc.push_back(adc);
+      m_hist_clus_fix_adc->Fill(adc);
+    }
 
     auto clus_npixels_adc = m_clus->GetNPixelsADC();
     if(!clus_npixels_adc.empty()){

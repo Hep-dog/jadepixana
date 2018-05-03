@@ -7,6 +7,7 @@
 #include "JadeOption.hh"
 #include "TTree.h"
 #include "TH2.h"
+#include "TString.h"
 #include "TFile.h"
 
 #include <string>
