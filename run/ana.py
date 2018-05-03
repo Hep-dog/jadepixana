@@ -1,4 +1,4 @@
-#!/opt/JadePixDAQ/dependencies/anaconda3/bin/python
+#!/besfs/groups/higgs/users/chenlj/software/anaconda3/bin/python
 
 import subprocess
 import time
