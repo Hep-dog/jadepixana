@@ -1,0 +1,44 @@
+{
+  "System":"JadeCore",
+  "JadeCore":{
+    "JadeRun":{
+      "type":"default",
+      "parameter":{
+        "something": "somthing",
+        "ENABLE_READ_FRAME_LIMITS":false,
+        "READ_FRAME_NUMBERS": 10000
+      }
+    },
+    "JadeRead":{
+      "type":"default",
+      "parameter":{
+        "PATH":"../data/raw_pixel/20180327/Fe_CHIPA2_180327110357.df"
+      }
+    },
+    "JadeAnalysis":{
+      "type":"default",
+      "parameter":{
+        "PATH":"./output/Fe_CHIPA2_1",
+        "DISABLE_FILE_WRITE":false,
+        "ENABLE_RAW_DATA_WRITE":false,
+        "ENABLE_HIT_MAP_WRITE":false,
+        "PRINT_EVENT_N": 10000,
+        "SEED_CUT":500,
+        "CLUSTER_CUT":500,
+        "DISTANCE_CUT":3,
+        "NEIGHGBOR_CUT":200,
+        "BASE_CUT":100,
+        "BASE_NUMBERS":1000,
+        "CLUSTER_SIZE":5,
+        "HIST_NBINS":5000
+      }
+    },
+    "JadeFilter":{
+      "type":"default",
+      "parameter":{
+        "something": "somthing"
+      }
+    }
+  }
+}
+
