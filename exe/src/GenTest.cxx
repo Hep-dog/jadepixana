@@ -22,16 +22,29 @@ void GetHist(int istart, int iend, int nbins, std::string in_path, std::string s
     auto nevents = cluster_tree->GetEntries();
 
     using IntVec = std::vector<int>;
+    using ShortVec = std::vector<int16_t>;
 
     TTreeReader theReader("clusters", fin);
     TTreeReaderValue<IntVec> seedRV(theReader, "seed_adc");
     TTreeReaderValue<IntVec> clusRV(theReader, "cluster_adc");
+    TTreeReaderValue<ShortVec> baseRV(theReader, "base_adc");
 
     TString seed_hist_name = Form("seed_hist_A%d", i);
     TString clus_hist_name = Form("cluster_hist_A%d", i);
 
     auto seed_hist = new TH1F(seed_hist_name, seed_hist_name, nbins, 0, nbins);
     auto clus_hist = new TH1F(clus_hist_name, clus_hist_name, nbins, 0, nbins);
+
+    const int m_nx = 16;
+    const int m_ny = 48;
+    const int pix_arrays = m_nx * m_ny;
+    std::shared_ptr<TH1F> base_hist[pix_arrays];
+    for (Int_t ix = 0; ix < m_nx; ix++)
+      for (Int_t iy = 0; iy < m_ny; iy++) {
+        auto pos = ix + m_nx * iy;
+        TString hist_name = Form("base_hist_A%d_pix%d_%d", i, ix, iy);
+        base_hist[pos] = std::make_shared<TH1F>(hist_name, hist_name, 1000, -500, 500);
+      }
 
     int counts = 0;
     while (theReader.Next()) {
@@ -52,11 +65,32 @@ void GetHist(int istart, int iend, int nbins, std::string in_path, std::string s
       }
 
       counts++;
+
+      auto base = baseRV.Get();
+      if (base->size() != 768) {
+        continue;
+      }
+
+      for (Int_t ix = 0; ix < m_nx; ix++)
+        for (Int_t iy = 0; iy < m_ny; iy++) {
+          auto pos = ix + m_nx * iy;
+          auto value = (*base).at(pos);
+          base_hist[pos]->Fill(value);
+        }
     }
 
     output_file->cd();
     seed_hist->Write();
     clus_hist->Write();
+
+    auto sub_dir = output_file->mkdir(Form("A%d",i));
+    sub_dir->cd();
+    for (Int_t ix = 0; ix < m_nx; ix++)
+      for (Int_t iy = 0; iy < m_ny; iy++) {
+        auto pos = ix + m_nx * iy;
+        base_hist[pos]->Write();
+      }
+
     fin->Close();
   }
 
