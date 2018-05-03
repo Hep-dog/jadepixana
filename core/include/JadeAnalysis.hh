@@ -36,6 +36,7 @@ class DLLEXPORT JadeAnalysis{
   int m_neigh_cut;
   int m_clus_cut;
   int m_clus_size;
+  int m_clus_fix_size;
   int m_base_cut;
   int m_base_numbers;
   int m_base_count;
@@ -43,8 +44,13 @@ class DLLEXPORT JadeAnalysis{
   std::vector<size_t> m_output_clus_size;
   std::shared_ptr<TTree>m_tree_adc; 
   std::shared_ptr<TH2D>m_hist2_clus_size_adc; 
+  std::shared_ptr<TH2D>m_hist2_clus_fix_adc; 
+  std::shared_ptr<TH1D>m_hist_seed_adc; 
+  std::shared_ptr<TH1D>m_hist_clus_adc; 
+  std::shared_ptr<TH1D>m_hist_clus_fix_adc; 
   std::vector<int> m_output_seed_adc;
   std::vector<int> m_output_clus_adc;
+  std::vector<int> m_output_clus_fix_adc;
   std::vector<int16_t> m_output_base_adc;
   std::vector<int> m_output_pileup_counts;
   std::vector<std::pair<int, int>> m_hit;
@@ -53,6 +59,9 @@ class DLLEXPORT JadeAnalysis{
   bool m_disable_file_write;
   bool m_enable_raw_data_write;
   bool m_enable_hit_map_write;
+  bool m_enable_tree_write;
+  bool m_enable_hist_write;
+  bool m_enable_fix_window_clus_write;
   JadeClusterSP m_clus;
 };
 

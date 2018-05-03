@@ -4,6 +4,18 @@ import subprocess
 import time
 import argparse
 
+Noise_file_name = [
+    "CHIPA1_180322145948.df"
+    ,"CHIPA2_180322145430.df"
+    ,"CHIPA3_180322150048.df"
+    ,"CHIPA4_180322150146.df"
+    ,"CHIPA5_180322150238.df"
+    ,"CHIPA6_180322150330.df"
+    ,"CHIPA7_180322150423.df"
+    ,"CHIPA8_180322150515.df"
+    ,"CHIPA9_180322150605.df"
+]
+
 Fe_CHIPA1_file_name = [
     "Fe_CHIPA1_180327103104.df"
     ,"Fe_CHIPA1_180327103306.df"
@@ -613,9 +625,63 @@ parser.add_argument('-t',
 ARGS = parser.parse_args()
 
 def get_file_name(source_name,chip_number):
-    infile_name = source_name+"_CHIPA"+ str(chip_number) +"_file_name"
-    outfile_name = source_name+"_CHIPA" + str(chip_number)
+    if(source_name=="Noise"):
+        infile_name = source_name+"_file_name"
+        outfile_name = source_name+"_CHIPA" + str(chip_number)
+    else:
+        infile_name = source_name+"_CHIPA"+ str(chip_number) +"_file_name"
+        outfile_name = source_name+"_CHIPA" + str(chip_number)
+
     return [infile_name, outfile_name]
+
+def gen_noise_config():
+
+    for i in range(ARGS.start,ARGS.end):
+
+      print("================== start >>>>>>>>>>\n")
+
+      config_file = "config/"+"Noise_CHIPA"+ str(i) +"_run00001.json"
+
+      copy_cmd = "cp "+ARGS.template_json+" "+ config_file
+
+      subprocess.call(copy_cmd, shell=True)
+
+      file_name = get_file_name(ARGS.source_name,i)
+      in_file_name = globals()[file_name[0]]
+      out_file_name = file_name[1]
+
+      # infile
+      in_cmd = "sed -n 15p " + config_file
+
+      in_str_cmd = str(subprocess.check_output(in_cmd, shell=True),'utf-8')
+
+      in_file = in_str_cmd.split("/")[-1][:-2]
+
+      in_rep_cmd = "sed -i 15s/" + in_file + "/" + in_file_name[i-1] + "/g " + config_file
+
+      subprocess.call(in_rep_cmd, shell=True)
+
+
+      # outfile
+      out_cmd = "sed -n 21p " + config_file
+
+      out_str_cmd = str(subprocess.check_output(out_cmd, shell=True),'utf-8')
+
+      out_file = out_str_cmd.split("/")[-1][:-3]
+
+      out_rep_cmd = "sed -i 21s/" + out_file + "/" + out_file_name + "_1"+ "/g " + config_file
+
+      subprocess.call(out_rep_cmd, shell=True)
+
+
+      print(str(subprocess.check_output(in_cmd, shell=True),'utf-8'))
+
+      print(str(subprocess.check_output(out_cmd, shell=True),'utf-8'))
+
+      time.sleep(0.1)
+
+      print("\n<<<<<<<<<<<<<<<<<< end ==============\n\n")
+
 
 def gen_config():
 
@@ -666,7 +732,10 @@ def gen_config():
       print("\n<<<<<<<<<<<<<<<<<< end ==============\n\n")
 
 def main():
-    gen_config()
+    if(ARGS.source_name == "Noise"):
+        gen_noise_config()
+    else:
+        gen_config()
 
 if __name__ == "__main__":
     main()
