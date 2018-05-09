@@ -162,15 +162,15 @@ int main(int argc, char** argv)
   }else if(source_name == "Sr"){
     for (Int_t iSector = start; iSector < end; iSector++) {
       std::cout << "============> Sector " << iSector << std::endl;
-      auto h_cluster = dynamic_cast<TH1F*>(infile->Get(Form("cluster_hist_A%d", iSector)));
-      h_cluster->Rebin(80);
+      auto h_cluster = dynamic_cast<TH1D*>(infile->Get(Form("A%d/clus_adc_A%d", iSector,iSector)));
+      h_cluster->Rebin(100);
 
       TString cname = Form("cluster_hist_A%d", iSector);
       auto c1 = new TCanvas(cname, cname, 10, 10, 800, 600);
 
       auto h_cluster_clone = (TH1D*)h_cluster->Clone("h_cluster_clone");
 
-      auto fitlandau = new TF1(Form("fitlandau%d",iSector),"landau",500,10000);
+      auto fitlandau = new TF1(Form("fitlandau%d",iSector),"landau",200,8000);
 
       h_cluster_clone->Draw();
       h_cluster_clone->Fit(Form("fitlandau%d",iSector), "RQ");
