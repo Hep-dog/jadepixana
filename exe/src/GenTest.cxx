@@ -25,15 +25,15 @@ void GetHist(int istart, int iend, int nbins, std::string in_path, std::string s
     using ShortVec = std::vector<int16_t>;
 
     TTreeReader theReader("clusters", fin);
-    TTreeReaderValue<IntVec> seedRV(theReader, "seed_adc");
-    TTreeReaderValue<IntVec> clusRV(theReader, "cluster_adc");
+    //TTreeReaderValue<IntVec> seedRV(theReader, "seed_adc");
+    //TTreeReaderValue<IntVec> clusRV(theReader, "cluster_adc");
     TTreeReaderValue<ShortVec> baseRV(theReader, "base_adc");
 
-    TString seed_hist_name = Form("seed_hist_A%d", i);
-    TString clus_hist_name = Form("cluster_hist_A%d", i);
+    //TString seed_hist_name = Form("seed_hist_A%d", i);
+    //TString clus_hist_name = Form("cluster_hist_A%d", i);
 
-    auto seed_hist = new TH1F(seed_hist_name, seed_hist_name, nbins, 0, nbins);
-    auto clus_hist = new TH1F(clus_hist_name, clus_hist_name, nbins, 0, nbins);
+    //auto seed_hist = new TH1F(seed_hist_name, seed_hist_name, nbins, 0, nbins);
+    //auto clus_hist = new TH1F(clus_hist_name, clus_hist_name, nbins, 0, nbins);
 
     const int m_nx = 16;
     const int m_ny = 48;
@@ -54,15 +54,15 @@ void GetHist(int istart, int iend, int nbins, std::string in_path, std::string s
                   << std::setprecision(3) << std::fixed << counts * 100.0 / nevents
                   << "% <--------" << std::endl;
 
-      auto seed = seedRV.Get();
-      for (auto& adc : *seed) {
-        seed_hist->Fill(adc);
-      }
+      //auto seed = seedRV.Get();
+      //for (auto& adc : *seed) {
+      //  seed_hist->Fill(adc);
+      //}
 
-      auto clus = clusRV.Get();
-      for (auto& adc : *clus) {
-        clus_hist->Fill(adc);
-      }
+      //auto clus = clusRV.Get();
+      //for (auto& adc : *clus) {
+      //  clus_hist->Fill(adc);
+      //}
 
       counts++;
 
@@ -80,8 +80,8 @@ void GetHist(int istart, int iend, int nbins, std::string in_path, std::string s
     }
 
     output_file->cd();
-    seed_hist->Write();
-    clus_hist->Write();
+    //seed_hist->Write();
+    //clus_hist->Write();
 
     auto sub_dir = output_file->mkdir(Form("A%d",i));
     sub_dir->cd();

@@ -28,6 +28,10 @@ add_executable(ProjectTest src/ProjectTest.cxx)
 target_link_libraries(ProjectTest ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS ProjectTest)
 
+add_executable(ProjectNPixel src/ProjectNPixel.cxx)
+target_link_libraries(ProjectNPixel ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS ProjectNPixel)
+
 add_executable(FitPeaks src/FitPeaks.cxx)
 target_link_libraries(FitPeaks ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS FitPeaks)

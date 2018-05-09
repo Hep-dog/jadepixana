@@ -22,17 +22,35 @@ parser.add_argument('--ce',
                     type=int,
                     help='chip number end')
 
+parser.add_argument('--mode',
+                    action='store',
+                    dest='mode',
+                    default='Hist',
+                    type=str,
+                    help='mode')
+
+
 ARGS = parser.parse_args()
 
 def add():
     for i in range(ARGS.chip_number_start, ARGS.chip_number_end):
-        cmd = "AddTest -c " + str(i) +" -s 1 -e 61 -n Sr -i output -o output/Sr_CHIPA" + str(i) + ".root"
+        cmd = "AddTest -c " + str(i) +" -s 1 -e 41 -n WeakFe -i output -o output/May_WeakFe_Tree_CHIPA" + str(i) + ".root"
+        subprocess.run(cmd, shell=True)
+        time.sleep(1)
+
+def addHist():
+    for i in range(ARGS.chip_number_start, ARGS.chip_number_end):
+        cmd = "HistTest -c " + str(i) +" -s 1 -e 31 -n WeakFe -i output -o output/May_WeakFe_CHIPA" + str(i) + ".root"
+
         subprocess.run(cmd, shell=True)
         time.sleep(1)
 
 
 def main():
-    add()
+    if(ARGS.mode == 'Hist'):
+        addHist()
+    else:
+        add()
 
 if __name__ == "__main__":
     main()

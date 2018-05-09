@@ -5,6 +5,8 @@ source /opt/allpix/root/install/bin/thisroot.sh
 export PATH=$ROOTSYS/bin:$PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib
 
+export PATH=/opt/JadePixDAQ/dependencies/anaconda3/bin:$PATH
+
 export PATH=$PATH:${HOME}/jadepixana/bin
 export JADEPIXANA_DIR=${HOME}/jadepixana
 export JADEPIXANA_ENV_SHELL=cepcvtx_setup.sh
