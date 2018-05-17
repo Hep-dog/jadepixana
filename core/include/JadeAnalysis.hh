@@ -63,6 +63,7 @@ class DLLEXPORT JadeAnalysis{
   bool m_enable_tree_write;
   bool m_enable_hist_write;
   bool m_enable_fix_window_clus_write;
+  bool m_enable_sparse_clus_write;
   JadeClusterSP m_clus;
 };
 
