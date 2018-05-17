@@ -20,6 +20,7 @@ void GetHist(int nbins, std::string in_path, TString out_path)
   }
   auto cluster_tree = dynamic_cast<TTree*>(fin->Get("clusters"));
   auto nevents = cluster_tree->GetEntries();
+  std::cout << "Total events: " << nevents << std::endl;
 
   using IntVec = std::vector<int>;
   using ShortVec = std::vector<int16_t>;
