@@ -39,7 +39,7 @@ else()
   list(APPEND CMAKE_SHARED_LINKER_FLAGS " -Wl,--no-undefined")
 endif()
 
-find_package(ROOT REQUIRED)
+find_package(ROOT REQUIRED COMPONENTS Spectrum)
 if(NOT ROOT_FOUND)
   message(FATAL_ERROR "Could not find ROOT, make sure to source the ROOT environment\n")
 endif()

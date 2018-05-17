@@ -36,9 +36,17 @@ add_executable(FitPeaks src/FitPeaks.cxx)
 target_link_libraries(FitPeaks ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS FitPeaks)
 
+add_executable(FitMultiplePeaks src/FitMultiplePeaks.cxx)
+target_link_libraries(FitMultiplePeaks ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS FitMultiplePeaks)
+
 add_executable(FitTwoPeaks src/FitTwoPeaks.cxx)
 target_link_libraries(FitTwoPeaks ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS FitTwoPeaks)
+
+add_executable(GetFits src/GetFits.cxx)
+target_link_libraries(GetFits ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS GetFits)
 
 add_executable(FindNoise src/FindNoise.cxx)
 target_link_libraries(FindNoise ${JADE_CORE_LIBRARY})
