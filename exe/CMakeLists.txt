@@ -52,6 +52,10 @@ add_executable(FindNoise src/FindNoise.cxx)
 target_link_libraries(FindNoise ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS FindNoise)
 
+add_executable(GenNoise src/GenNoise.cxx)
+target_link_libraries(GenNoise ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS GenNoise)
+
 install(TARGETS ${INSTALL_TARGETS}
   DESTINATION bin
   LIBRARY DESTINATION lib
