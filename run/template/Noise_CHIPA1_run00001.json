@@ -5,32 +5,36 @@
       "type":"default",
       "parameter":{
         "something": "somthing",
-        "ENABLE_READ_FRAME_LIMITS":false,
+        "ENABLE_READ_FRAME_LIMITS":true,
         "READ_FRAME_NUMBERS": 10000
       }
     },
     "JadeRead":{
       "type":"default",
       "parameter":{
-        "PATH":"../data/raw_pixel/20180322/CHIPA1_180322145948.df"
+        "PATH":"../data/noise/File20180518-4.df"
       }
     },
     "JadeAnalysis":{
       "type":"default",
       "parameter":{
-        "PATH":"./output/Noise_CHIPA1_1",
+        "PATH":"./output/Noise_CHIPA1_4",
         "DISABLE_FILE_WRITE":false,
         "ENABLE_RAW_DATA_WRITE":false,
         "ENABLE_HIT_MAP_WRITE":false,
-        "PRINT_EVENT_N": 10000,
+        "PRINT_EVENT_N": 2000,
         "SEED_CUT":500,
         "CLUSTER_CUT":500,
         "DISTANCE_CUT":3,
         "NEIGHGBOR_CUT":200,
         "BASE_CUT":500,
-        "BASE_NUMBERS":1000,
+        "BASE_NUMBERS":10000,
         "CLUSTER_SIZE":5,
-        "HIST_NBINS":5000
+        "CLUSTER_FIX_WINDOW_SIZE":5,
+        "HIST_NBINS":20000,
+        "ENABLE_FIX_WINDOW_CLUS_WRITE":false,
+        "ENABLE_SPARSE_CLUS_WRITE":false,
+        "ENABLE_TREE_WRITE":true
       }
     },
     "JadeFilter":{
