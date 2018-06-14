@@ -30,7 +30,10 @@
         "BASE_CUT":100,
         "BASE_NUMBERS":1000,
         "CLUSTER_SIZE":5,
-        "HIST_NBINS":20000
+        "HIST_NBINS":20000,
+        "ENABLE_FIX_WINDOW_CLUS_WRITE":true,
+        "ENABLE_SPARSE_CLUS_WRITE":true,
+        "ENABLE_TREE_WRITE":true
       }
     },
     "JadeFilter":{

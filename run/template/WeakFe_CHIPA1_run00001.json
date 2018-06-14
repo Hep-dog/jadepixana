@@ -33,6 +33,7 @@
         "CLUSTER_FIX_WINDOW_SIZE":5,
         "HIST_NBINS":5000,
         "ENABLE_FIX_WINDOW_CLUS_WRITE":true,
+        "ENABLE_SPARSE_CLUS_WRITE":true,
         "ENABLE_TREE_WRITE":true
       }
     },
