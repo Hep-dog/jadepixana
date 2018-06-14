@@ -56,6 +56,14 @@ add_executable(GenNoise src/GenNoise.cxx)
 target_link_libraries(GenNoise ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS GenNoise)
 
+add_executable(GenRaw src/GenRaw.cxx)
+target_link_libraries(GenRaw ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS GenRaw)
+
+add_executable(FitSim src/FitSim.cxx)
+target_link_libraries(FitSim ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS FitSim)
+
 install(TARGETS ${INSTALL_TARGETS}
   DESTINATION bin
   LIBRARY DESTINATION lib

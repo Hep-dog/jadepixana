@@ -79,8 +79,6 @@ int main(int argc, char** argv)
     auto lg = new TLegend(0.1, 0.7, 0.48, 0.9);
     for (Int_t iSector = start; iSector < end; iSector++) {
       std::cout << "============> Sector " << iSector << std::endl;
-      if ((iSector != 1) && (iSector != 4) && (iSector != 7))
-        continue;
       auto gname = Form("A%d/clus_size_Mean_ADC_A%d", iSector, iSector);
       std::cout << gname << std::endl;
       auto g_clus = dynamic_cast<TGraph*>(infile->Get(gname));
@@ -97,7 +95,7 @@ int main(int argc, char** argv)
       g_clus->SetLineColor(iSector % 8 + 1);
       g_clus->GetXaxis()->SetTitle("Number of pixels in a cluster");
       g_clus->GetYaxis()->SetTitle("Mean of charge collection peak[ADC]");
-      g_clus->GetYaxis()->SetRangeUser(0, 4000);
+      g_clus->GetYaxis()->SetRangeUser(0, 12000);
       lg->AddEntry(g_clus, Form("A%d", iSector), "lp");
     }
 
@@ -110,8 +108,6 @@ int main(int argc, char** argv)
     auto lge = new TLegend(0.1, 0.7, 0.48, 0.9);
     for (Int_t iSector = start; iSector < end; iSector++) {
       std::cout << "============> Sector " << iSector << std::endl;
-      if ((iSector != 1) && (iSector != 4) && (iSector != 7))
-        continue;
       auto gname = Form("A%d/clus_size_CCE_A%d", iSector, iSector);
       std::cout << gname << std::endl;
       auto g_clus = dynamic_cast<TGraph*>(infile->Get(gname));
@@ -139,9 +135,9 @@ int main(int argc, char** argv)
     auto c1 = new TCanvas("clus_size_MPV_ADC", "clus_size_MPV_ADC", 10, 10, 800, 600);
     auto lg = new TLegend(0.1, 0.7, 0.48, 0.9);
     for (Int_t iSector = start; iSector < end; iSector++) {
-      if ((iSector == 5) || (iSector == 6))
-        continue;
       std::cout << "============> Sector " << iSector << std::endl;
+      if (iSector == 5 || iSector == 6)
+        continue;
       auto gname = Form("A%d/clus_size_MPV_ADC_A%d", iSector, iSector);
       std::cout << gname << std::endl;
       auto g_clus = dynamic_cast<TGraph*>(infile->Get(gname));
@@ -171,7 +167,7 @@ int main(int argc, char** argv)
     auto lge = new TLegend(0.1, 0.7, 0.48, 0.9);
     for (Int_t iSector = start; iSector < end; iSector++) {
       std::cout << "============> Sector " << iSector << std::endl;
-      if ((iSector == 5) || (iSector == 6))
+      if (iSector == 5 || iSector == 6)
         continue;
       auto gname = Form("A%d/clus_size_MPV_Charge_A%d", iSector, iSector);
       std::cout << gname << std::endl;
@@ -197,6 +193,37 @@ int main(int argc, char** argv)
     c2->Update();
     output_file->cd();
     c2->Write();
+
+    auto c3 = new TCanvas("clus_size_MPV_signal_to_noise", "clus_size_MPV_signal_to_noise", 10, 10, 800, 600);
+    auto lgs2n = new TLegend(0.1, 0.7, 0.48, 0.9);
+    for (Int_t iSector = start; iSector < end; iSector++) {
+      std::cout << "============> Sector " << iSector << std::endl;
+      if (iSector == 5 || iSector == 6)
+        continue;
+      auto gname = Form("A%d/clus_size_signal_to_noise_A%d", iSector, iSector);
+      std::cout << gname << std::endl;
+      auto g_clus = dynamic_cast<TGraph*>(infile->Get(gname));
+
+      if (iSector == 1) {
+        g_clus->Draw("ALP");
+      } else {
+        g_clus->Draw("SAME,LP");
+      }
+
+      g_clus->SetTitle("");
+      g_clus->SetMarkerColor(iSector % 8 + 1);
+      g_clus->SetMarkerStyle(iSector % 8 + 2);
+      g_clus->SetLineColor(iSector % 8);
+      g_clus->GetXaxis()->SetTitle("Number of pixels in a cluster");
+      g_clus->GetYaxis()->SetTitle("S/N");
+      g_clus->GetYaxis()->SetRangeUser(0, 1000);
+      lgs2n->AddEntry(g_clus, Form("A%d", iSector), "lp");
+    }
+
+    lgs2n->Draw();
+    c3->Update();
+    output_file->cd();
+    c3->Write();
   }
 
   infile->Close();

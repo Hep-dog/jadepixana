@@ -79,8 +79,6 @@ int main(int argc, char** argv)
 
   for (int i = start; i < end; i++) {
 
-    if (i == 5 || i == 6)
-      continue;
     std::cout << "---------> " << i << " <------------" << std::endl;
     TString infile_name = Form("%s/%s_CHIPA%d.root", in_path.c_str(), source_name.c_str(), i);
 
@@ -112,7 +110,7 @@ int main(int argc, char** argv)
         //hpr->Draw();
         hpr_npix->Draw();
         hpr_npix->SetLineColor(iBin % 8);
-        hpr_npix->GetYaxis()->SetRangeUser(0, 8000);
+        //hpr_npix->GetYaxis()->SetRangeUser(0, 8000);
         hpr_npix->GetXaxis()->SetTitle("ADC");
       } else {
         //hpr->Draw("same");

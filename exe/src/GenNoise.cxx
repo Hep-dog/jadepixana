@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-void GetHist(int nbins, std::string in_path, TString out_path)
+void GetHist(int nbins, double gain, std::string in_path, TString out_path)
 {
   auto output_file = new TFile(out_path, "RECREATE");
 
@@ -61,15 +61,26 @@ void GetHist(int nbins, std::string in_path, TString out_path)
   }
 
   auto h2_mean_name = Form("hist_mean");
-  auto h2_mean = new TH2F(h2_mean_name, h2_mean_name, m_ny, 0, m_ny, m_nx, 0, m_nx);
+  auto h2_mean = new TH2F(h2_mean_name, h2_mean_name, m_ny, 1.0, m_ny*1.0, m_nx, 1.0, m_nx*1.0);
   auto h2_rms_name = Form("hist_rms");
-  auto h2_rms = new TH2F(h2_rms_name, h2_rms_name, m_ny, 0, m_ny, m_nx, 0, m_nx);
+  auto h2_rms = new TH2F(h2_rms_name, h2_rms_name, m_ny, 1.0, m_ny*1.0, m_nx, 1.0, m_nx*1.0);
+  auto h2_rms_enc_name = Form("hist_rms_enc");
+  auto h2_rms_enc = new TH2F(h2_rms_enc_name, h2_rms_enc_name, m_ny, 1.0, m_ny*1.0, m_nx, 1.0, m_nx*1.0);
+  double rms_enc_mean = 0;
+  double rms_mean = 0;
   for (Int_t ix = 0; ix < m_nx; ix++)
     for (Int_t iy = 0; iy < m_ny; iy++) {
       auto pos = ix + m_nx * iy;
-      h2_mean->Fill(iy, ix, base_hist[pos]->GetMean());
-      h2_rms->Fill(iy, ix, base_hist[pos]->GetRMS());
+      h2_mean->SetBinContent(iy+1.0, ix+1.0, base_hist[pos]->GetMean());
+      h2_rms->SetBinContent(iy+1.0, ix+1.0, base_hist[pos]->GetRMS());
+      h2_rms_enc->SetBinContent(iy+1.0, ix+1.0, base_hist[pos]->GetRMS() / gain);
+      rms_mean += base_hist[pos]->GetRMS();
+      rms_enc_mean += base_hist[pos]->GetRMS() / gain;
     }
+  rms_mean = rms_mean / m_nx / m_ny;
+  rms_enc_mean = rms_enc_mean / m_nx / m_ny;
+  std::cout << "rms mean: " << rms_mean << std::endl;
+  std::cout << "rms enc mean: " << rms_enc_mean << std::endl;
 
   output_file->cd();
   for (Int_t ix = 0; ix < m_nx; ix++)
@@ -79,6 +90,7 @@ void GetHist(int nbins, std::string in_path, TString out_path)
     }
   h2_mean->Write();
   h2_rms->Write();
+  h2_rms_enc->Write();
 
   fin->Close();
 
@@ -101,6 +113,7 @@ int main(int argc, char** argv)
   std::string opt_nbins = "5000";
   std::string opt_output_file = "WeakFe.root";
   std::string opt_in_path = "output";
+  std::string opt_gain = "1";
 
   for (int i = 1; i < argc; i++) {
     std::string opt(argv[i]);
@@ -122,13 +135,20 @@ int main(int argc, char** argv)
         opt_output_file = argv[i];
       }
     }
+    if (opt == "-g") {
+      if (i + 1 < argc) {
+        i++;
+        opt_gain = argv[i];
+      }
+    }
   }
 
   int nbins = static_cast<int>(std::stoul(opt_nbins));
   TString output_file = opt_output_file;
   std::string in_path = opt_in_path;
+  double gain = static_cast<double>(std::stod(opt_gain));
 
-  GetHist(nbins, in_path, output_file);
+  GetHist(nbins, gain, in_path, output_file);
 
   std::cout << "File saved as: \n"
             << output_file << std::endl;
