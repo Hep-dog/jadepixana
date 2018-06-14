@@ -1,0 +1,48 @@
+{
+  "System":"JadeCore",
+  "JadeCore":{
+    "JadeRun":{
+      "type":"default",
+      "parameter":{
+        "something": "somthing",
+        "ENABLE_READ_FRAME_LIMITS":false,
+        "READ_FRAME_NUMBERS": 10000
+      }
+    },
+    "JadeRead":{
+      "type":"default",
+      "parameter":{
+        "PATH":"../data/raw_pixel/20180502/Sr_CHIPA4_180430105324.df"
+      }
+    },
+    "JadeAnalysis":{
+      "type":"default",
+      "parameter":{
+        "PATH":"./output/May_Sr_CHIPA4_1",
+        "DISABLE_FILE_WRITE":false,
+        "ENABLE_RAW_DATA_WRITE":false,
+        "ENABLE_HIT_MAP_WRITE":true,
+        "PRINT_EVENT_N": 10000,
+        "SEED_CUT":500,
+        "CLUSTER_CUT":500,
+        "DISTANCE_CUT":3,
+        "NEIGHGBOR_CUT":150,
+        "BASE_CUT":120,
+        "BASE_NUMBERS":1000,
+        "CLUSTER_SIZE":5,
+        "CLUSTER_FIX_WINDOW_SIZE":5,
+        "HIST_NBINS":20000,
+        "ENABLE_FIX_WINDOW_CLUS_WRITE":true,
+        "ENABLE_SPARSE_CLUS_WRITE":true,
+        "ENABLE_TREE_WRITE":true
+      }
+    },
+    "JadeFilter":{
+      "type":"default",
+      "parameter":{
+        "something": "somthing"
+      }
+    }
+  }
+}
+
