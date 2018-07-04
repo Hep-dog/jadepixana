@@ -37,6 +37,8 @@ class DLLEXPORT JadeAnalysis{
   int m_neigh_cut;
   int m_clus_cut;
   int m_clus_size;
+  int m_select_clus_adc_cut;
+  int m_select_clus_size_cut;
   int m_clus_fix_size;
   int m_base_cut;
   int m_base_numbers;

@@ -1,10 +1,10 @@
 #include "JadeAnalysis.hh"
 
-JadeAnalysis::JadeAnalysis(const JadeOption& opt)
-    : m_opt(opt)
-    , m_ev_n(0)
-    , m_ev_print(0)
-    , m_base_count(0)
+  JadeAnalysis::JadeAnalysis(const JadeOption& opt)
+  : m_opt(opt)
+  , m_ev_n(0)
+  , m_ev_print(0)
+  , m_base_count(0)
     , m_base_numbers(1000)
 {
   m_ev_print = m_opt.GetIntValue("PRINT_EVENT_N");
@@ -17,6 +17,8 @@ JadeAnalysis::JadeAnalysis(const JadeOption& opt)
   m_base_cut = m_opt.GetIntValue("BASE_CUT");
   m_base_numbers = m_opt.GetIntValue("BASE_NUMBERS");
   m_enable_raw_data_write = m_opt.GetBoolValue("ENABLE_RAW_DATA_WRITE");
+  m_select_clus_size_cut = m_opt.GetIntValue("SELECT_CLUSTER_SIZE_CUT");
+  m_select_clus_adc_cut = m_opt.GetIntValue("SELECT_CLUSTER_ADC_CUT");
   m_enable_hit_map_write = m_opt.GetBoolValue("ENABLE_HIT_MAP_WRITE");
   m_enable_fix_window_clus_write = m_opt.GetBoolValue("ENABLE_FIX_WINDOW_CLUS_WRITE");
   m_enable_sparse_clus_write = m_opt.GetBoolValue("ENABLE_SPARSE_CLUS_WRITE");
@@ -113,18 +115,12 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
     return;
   }
 
-  if (m_enable_raw_data_write) {
-    m_cds_adc.clear();
-    m_raw_adc.clear();
-    m_cds_adc = df->GetFrameCDS();
-    m_raw_adc = df->GetFrameData();
-  }
 
   m_output_base_adc.clear();
   if (m_base_count < m_base_numbers) {
     auto cds_adc = df->GetFrameCDS();
     if (std::none_of(cds_adc.begin(), cds_adc.end(),
-            [=](auto& cds) { return abs(cds) > m_base_cut ? true : false; })) {
+          [=](auto& cds) { return abs(cds) > m_base_cut ? true : false; })) {
       m_output_base_adc.swap(cds_adc);
       m_base_count++;
     }
@@ -216,6 +212,21 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
       m_hit.push_back(pos);
     }
     //std::cout << '\n';
+  }
+
+  if (m_enable_raw_data_write) {
+    bool _enable_select=false;
+    for(int i=0; i< clus_adc.size(); i++){
+      if(clus_size.at(i)==m_select_clus_size_cut && clus_adc.at(i)>m_select_clus_adc_cut){
+        _enable_select=true;
+      }
+    }
+    if(_enable_select){
+      m_cds_adc.clear();
+      m_raw_adc.clear();
+      m_cds_adc = df->GetFrameCDS();
+      m_raw_adc = df->GetFrameData();
+    }
   }
 
   m_tree_adc->Fill();

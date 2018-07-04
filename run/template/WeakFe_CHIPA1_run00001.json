@@ -18,9 +18,11 @@
     "JadeAnalysis":{
       "type":"default",
       "parameter":{
-        "PATH":"./output/WeakFe_CHIPA1_1",
+        "PATH":"./output/WeakFe_SELECT_CHIPA1_1",
         "DISABLE_FILE_WRITE":false,
-        "ENABLE_RAW_DATA_WRITE":false,
+        "ENABLE_RAW_DATA_WRITE":true,
+        "SELECT_CLUSTER_SIZE_CUT":2,
+        "SELECT_CLUSTER_ADC_CUT":4000,
         "ENABLE_HIT_MAP_WRITE":false,
         "PRINT_EVENT_N": 10000,
         "SEED_CUT":500,
@@ -32,8 +34,8 @@
         "CLUSTER_SIZE":5,
         "CLUSTER_FIX_WINDOW_SIZE":5,
         "HIST_NBINS":5000,
-        "ENABLE_FIX_WINDOW_CLUS_WRITE":true,
-        "ENABLE_SPARSE_CLUS_WRITE":true,
+        "ENABLE_FIX_WINDOW_CLUS_WRITE":false,
+        "ENABLE_SPARSE_CLUS_WRITE":false,
         "ENABLE_TREE_WRITE":true
       }
     },
