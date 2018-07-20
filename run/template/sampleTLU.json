@@ -12,26 +12,26 @@
     "JadeRead":{
       "type":"default",
       "parameter":{
-        "PATH":"/home/chenlj/Documents/Code/jadepixana/data/test_180417145306.df"
+        "PATH":"/home/cepcdaq/Documents/data/sync_test_tlu_CHIPA1_180720190441.df"
       }
     },
     "JadeAnalysis":{
       "type":"default",
       "parameter":{
-        "PATH":"/home/chenlj/Documents/Code/jadepixana/data/test",
+        "PATH":"/home/cepcdaq/Documents/data/sync_test_tlu_CHIPA1_180720190441",
         "DISABLE_FILE_WRITE":false,
         "ENABLE_RAW_DATA_WRITE":false,
         "ENABLE_HIT_MAP_WRITE":true,
-        "PRINT_EVENT_N": 100,
-        "SEED_CUT":500,
-        "CLUSTER_CUT":200,
+        "PRINT_EVENT_N": 1000,
+        "SEED_CUT":1500,
+        "CLUSTER_CUT":1500,
         "DISTANCE_CUT":3,
-        "NEIGHGBOR_CUT":200,
-        "BASE_CUT":100,
+        "NEIGHGBOR_CUT":600,
+        "BASE_CUT":500,
         "BASE_NUMBERS":1000,
         "CLUSTER_SIZE":3,
         "HIST_NBINS":20000,
-        "SERIAL_ORDERS":5
+        "SERIAL_ORDERS":3
       }
     },
     "JadeFilter":{
