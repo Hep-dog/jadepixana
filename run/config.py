@@ -397,6 +397,16 @@ WeakFe_CHIPA9_file_name = [
   ,"WeakFe_CHIPA9_180403170938.df"
 ]
 
+WeakFe_SELECT_CHIPA1_file_name = WeakFe_CHIPA1_file_name
+WeakFe_SELECT_CHIPA2_file_name = WeakFe_CHIPA2_file_name
+WeakFe_SELECT_CHIPA3_file_name = WeakFe_CHIPA3_file_name
+WeakFe_SELECT_CHIPA4_file_name = WeakFe_CHIPA4_file_name
+WeakFe_SELECT_CHIPA5_file_name = WeakFe_CHIPA5_file_name
+WeakFe_SELECT_CHIPA6_file_name = WeakFe_CHIPA6_file_name
+WeakFe_SELECT_CHIPA7_file_name = WeakFe_CHIPA7_file_name
+WeakFe_SELECT_CHIPA8_file_name = WeakFe_CHIPA8_file_name
+WeakFe_SELECT_CHIPA9_file_name = WeakFe_CHIPA9_file_name
+
 WeakFe_ND_CHIPA1_file_name = [
   "WeakFe_ND_CHIPA1_180530160808.df"
   ,"WeakFe_ND_CHIPA1_180530161810.df"
@@ -831,6 +841,22 @@ May_Sr_CHIPA7_file_name = [
   ,"Sr_CHIPA7_180501000616.df"
   ,"Sr_CHIPA7_180501001618.df"
   ,"Sr_CHIPA7_180501002620.df"
+]
+
+RC1_WeakFe_CHIPA1_file_name=[
+  "RC1_WeakFe_CHIPA1_180717163643.df"
+  ,"RC1_WeakFe_CHIPA1_180717164334.df"
+  ,"RC1_WeakFe_CHIPA1_180717165337.df"
+  ,"RC1_WeakFe_CHIPA1_180717170339.df"
+  ,"RC1_WeakFe_CHIPA1_180717171341.df"
+  ,"RC1_WeakFe_CHIPA1_180717172343.df"
+  ,"RC1_WeakFe_CHIPA1_180717173345.df"
+  ,"RC1_WeakFe_CHIPA1_180717174347.df"
+  ,"RC1_WeakFe_CHIPA1_180717175349.df"
+  ,"RC1_WeakFe_CHIPA1_180717180351.df"
+  ,"RC1_WeakFe_CHIPA1_180717181353.df"
+  ,"RC1_WeakFe_CHIPA1_180717182356.df"
+  ,"RC1_WeakFe_CHIPA1_180717183358.df"
 ]
 
 parser = argparse.ArgumentParser(description='JadePix Analysis Config')

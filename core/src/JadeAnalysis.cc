@@ -214,16 +214,16 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
     //std::cout << '\n';
   }
 
+  m_cds_adc.clear();
+  m_raw_adc.clear();
   if (m_enable_raw_data_write) {
     bool _enable_select=false;
     for(int i=0; i< clus_adc.size(); i++){
-      if(clus_size.at(i)==m_select_clus_size_cut && clus_adc.at(i)>m_select_clus_adc_cut){
+      if((clus_size.at(i)==m_select_clus_size_cut) && (clus_adc.at(i)>m_select_clus_adc_cut)){
         _enable_select=true;
       }
     }
     if(_enable_select){
-      m_cds_adc.clear();
-      m_raw_adc.clear();
       m_cds_adc = df->GetFrameCDS();
       m_raw_adc = df->GetFrameData();
     }
