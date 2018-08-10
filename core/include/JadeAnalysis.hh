@@ -33,6 +33,7 @@ class DLLEXPORT JadeAnalysis{
   size_t m_ev_n;
   double m_distance_cut;
   int m_seed_cut;
+  int m_seed_edge_cut;
   int m_neigh_cut;
   int m_clus_cut;
   int m_clus_size;

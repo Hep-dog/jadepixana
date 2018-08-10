@@ -12,6 +12,7 @@ JadeCluster::JadeCluster()
     , m_frame_adc({ 0 })
     , m_pixel_can_be_used({ true })
     , m_seed_thr(0)
+    , m_seed_edge(0)
     , m_cluster_thr(0)
     , m_neigh_thr(0)
     , m_size(0)
@@ -25,6 +26,7 @@ JadeCluster::JadeCluster(JadeDataFrameSP df)
     , m_pixel_can_be_used({ true })
     , m_seed_thr(0)
     , m_cluster_thr(0)
+    , m_seed_edge(0)
     , m_neigh_thr(0)
     , m_size(0)
     , m_distance_cut(3)
@@ -40,6 +42,11 @@ JadeCluster::JadeCluster(JadeDataFrameSP df)
 
 JadeCluster::~JadeCluster()
 {
+}
+
+void JadeCluster::SetSeedEDGE(int16_t edge)
+{
+  m_seed_edge = edge;
 }
 
 void JadeCluster::SetSeedTHR(int16_t thr)
@@ -162,12 +169,12 @@ double JadeCluster::GetDistance(std::pair<size_t, size_t> p1, std::pair<size_t, 
   return std::sqrt(x * x + y * y);
 }
 
-std::vector<std::pair<size_t, size_t> > JadeCluster::GetSeedCoord()
+std::vector<std::pair<size_t, size_t>> JadeCluster::GetSeedCoord()
 {
   if (!m_is_seed_find)
     FindSeed();
 
-  std::vector<std::pair<size_t, size_t> > _seed_coord;
+  std::vector<std::pair<size_t, size_t>> _seed_coord;
 
   _seed_coord.resize(m_seed.size());
 
@@ -287,9 +294,9 @@ int JadeCluster::GetPileUpCounts()
   return m_pileup_counts;
 }
 
-std::vector<std::pair<double, double> > JadeCluster::GetCenterOfGravity()
+std::vector<std::pair<double, double>> JadeCluster::GetCenterOfGravity()
 {
-  std::vector<std::pair<double, double> > _center;
+  std::vector<std::pair<double, double>> _center;
   auto xCenter = GetXCenterOfGravity();
   auto yCenter = GetYCenterOfGravity();
 

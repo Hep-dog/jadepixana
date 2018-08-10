@@ -17,7 +17,9 @@ class DLLEXPORT JadeCluster {
   JadeCluster(JadeDataFrameSP df);
   virtual ~JadeCluster();
   void SetSeedTHR(int16_t thr);
+  void SetSeedEDGE(int16_t edge);
   void SetClusterTHR(int16_t thr);
+  void SetClusterEDGE(int16_t edge);
   void SetNeighbourTHR(int16_t thr);
   void SetClusterSize(size_t size);
   void SetDistanceCut(double cut);
@@ -65,6 +67,7 @@ class DLLEXPORT JadeCluster {
   std::vector<int16_t> m_frame_adc;
   std::vector<bool> m_pixel_can_be_used;
   int16_t m_seed_thr;
+  int16_t m_seed_edge;
   int16_t m_cluster_thr;
   int16_t m_neigh_thr;
   size_t m_size;

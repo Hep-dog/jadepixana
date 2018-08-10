@@ -9,6 +9,7 @@ JadeAnalysis::JadeAnalysis(const JadeOption& opt)
 {
   m_ev_print = m_opt.GetIntValue("PRINT_EVENT_N");
   m_seed_cut = m_opt.GetIntValue("SEED_CUT");
+  m_seed_edge_cut = m_opt.GetIntValue("SEED_EDGE_CUT");
   m_neigh_cut = m_opt.GetIntValue("NEIGHGBOR_CUT");
   m_clus_cut = m_opt.GetIntValue("CLUSTER_CUT");
   m_clus_size = m_opt.GetIntValue("CLUSTER_SIZE");
@@ -112,6 +113,7 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
 
   m_clus = std::make_shared<JadeCluster>(df);
   m_clus->SetSeedTHR(m_seed_cut);
+  m_clus->SetSeedEDGE(m_seed_edge_cut);
   m_clus->SetNeighbourTHR(m_neigh_cut);
   m_clus->SetClusterTHR(m_clus_cut);
   m_clus->SetClusterSize(m_clus_size);
