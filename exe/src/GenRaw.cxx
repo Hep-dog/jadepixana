@@ -30,7 +30,7 @@ void GetHist(int cut, std::string enbale_raw_plot, std::string in_path, TString 
   TTreeReaderValue<ShortVec> cdsRV(theReader, "cds_adc");
 
   const int m_nx = 16;
-  const int m_ny = 48;
+  const int m_ny = 96;
   const int pix_arrays = m_nx * m_ny;
 
   auto raw_sub_dir = output_file->mkdir("raw");

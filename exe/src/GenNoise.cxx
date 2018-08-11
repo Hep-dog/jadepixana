@@ -29,7 +29,7 @@ void GetHist(int nbins, double gain, std::string in_path, TString out_path)
   TTreeReaderValue<ShortVec> baseRV(theReader, "base_adc");
 
   const int m_nx = 16;
-  const int m_ny = 48;
+  const int m_ny = 96;
   const int pix_arrays = m_nx * m_ny;
   std::shared_ptr<TH1F> base_hist[pix_arrays];
   for (Int_t ix = 0; ix < m_nx; ix++)
