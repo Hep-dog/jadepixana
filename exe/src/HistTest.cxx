@@ -86,7 +86,8 @@ int main(int argc, char** argv)
   for (int i = start; i < end; i++) {
 
     std::cout << "---------> " << i << " <------------" << std::endl;
-    TString infile_name = Form("%s/%s_CHIPA%d_%d.root", in_path.c_str(), source_name.c_str(), chip_number, i);
+    //TString infile_name = Form("%s/%s_CHIPA%d_%d.root", in_path.c_str(), source_name.c_str(), chip_number, i);
+    TString infile_name = Form("%s/%s_A%d_%d.root", in_path.c_str(), source_name.c_str(), chip_number, i);
     infile.push_back(new TFile(infile_name));
     std::cout << "---------> Processing file " << infile_name << std::endl;
   }

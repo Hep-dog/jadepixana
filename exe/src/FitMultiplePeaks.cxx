@@ -148,18 +148,28 @@ std::vector<Double_t> InitialFeParameters(Int_t sector)
   }
 }
 
+//std::vector<Double_t> InitialFeNDParameters(Int_t sector)
+//{
+//  std::vector<Double_t> par;
+//  switch (sector) {
+//  case 1:
+//    par = { 11200, 11800, 12400, 13000 };
+//    return par;
+//  case 2:
+//    par = { 9800, 10200, 10800, 11200 };
+//    return par;
+//  case 3:
+//    par = { 7000, 7400, 7800, 8100 };
+//    return par;
+//  }
+//}
+
 std::vector<Double_t> InitialFeNDParameters(Int_t sector)
 {
   std::vector<Double_t> par;
   switch (sector) {
   case 1:
-    par = { 11200, 11800, 12400, 13000 };
-    return par;
-  case 2:
-    par = { 9800, 10200, 10800, 11200 };
-    return par;
-  case 3:
-    par = { 7000, 7400, 7800, 8100 };
+    par = { 6000, 8000, 9000, 10000 };
     return par;
   }
 }

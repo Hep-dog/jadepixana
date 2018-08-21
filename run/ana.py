@@ -32,6 +32,8 @@ parser.add_argument('--mode',
 
 ARGS = parser.parse_args()
 
+chip_number = [1,2,3,4,7]
+
 def add():
     for i in range(ARGS.chip_number_start, ARGS.chip_number_end):
         cmd = "AddTest -c " + str(i) +" -s 1 -e 7 -n WeakFe_ND -i output -o output/WeakFe_ND_Tree_CHIPA" + str(i) + ".root"
@@ -39,8 +41,9 @@ def add():
         time.sleep(1)
 
 def addHist():
-    for i in range(ARGS.chip_number_start, ARGS.chip_number_end):
-        cmd = "HistTest -c " + str(i) +" -s 1 -e 31 -n WeakFe -i output -o output/May_WeakFe_CHIPA" + str(i) + ".root"
+    #for i in range(ARGS.chip_number_start, ARGS.chip_number_end):
+    for i in chip_number:
+        cmd = "HistTest -c " + str(i) +" -s 1 -e 13 -n RC1_WeakFe -i output -o output/RC1_WeakFe_CHIPA" + str(i) + ".root"
 
         subprocess.run(cmd, shell=True)
         time.sleep(1)
