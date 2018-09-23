@@ -80,7 +80,10 @@ int main(int argc, char** argv)
   for (int i = start; i < end; i++) {
 
     std::cout << "---------> " << i << " <------------" << std::endl;
-    TString infile_name = Form("%s/%s_CHIPA%d.root", in_path.c_str(), source_name.c_str(), i);
+    if(i == 5 || i == 6){
+      continue; 
+    }
+    TString infile_name = Form("%s/%s%d.root", in_path.c_str(), source_name.c_str(), i);
 
     std::cout << "---------> Processing file " << infile_name << std::endl;
     auto infile = new TFile(infile_name);

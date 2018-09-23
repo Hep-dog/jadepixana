@@ -148,18 +148,40 @@ std::vector<Double_t> InitialFeParameters(Int_t sector)
   }
 }
 
+// std::vector<Double_t> InitialFeNDParameters(Int_t sector)
+// {
+  // std::vector<Double_t> par;
+  // switch (sector) {
+  // case 1:
+    // par = { 11200, 11800, 12400, 13000 };
+    // return par;
+  // case 2:
+    // par = { 9800, 10200, 10800, 11200 };
+    // return par;
+  // case 3:
+    // par = { 7000, 7400, 7800, 8100 };
+    // return par;
+  // }
+// }
+
 std::vector<Double_t> InitialFeNDParameters(Int_t sector)
 {
   std::vector<Double_t> par;
   switch (sector) {
   case 1:
-    par = { 11200, 11800, 12400, 13000 };
+    par = { 10600, 11200, 11700, 12300 };
     return par;
   case 2:
-    par = { 9800, 10200, 10800, 11200 };
+    par = { 12000, 12500, 13000, 13700 };
     return par;
   case 3:
-    par = { 7000, 7400, 7800, 8100 };
+    par = { 8200, 8800, 9200, 9600 };
+    return par;
+  case 4:
+    par = { 11500, 12100, 13000, 13500 };
+    return par;
+  case 7:
+    par = { 12000, 12600, 13200, 13700 };
     return par;
   }
 }
@@ -389,6 +411,8 @@ int main(int argc, char** argv)
     std::vector<std::pair<double, double>> data;
     for (Int_t iSector = start; iSector < end; iSector++) {
       std::cout << "============> Sector " << iSector << std::endl;
+      if (iSector == 5 || iSector == 6)
+        continue;
       Sectors[iSector - start] = iSector;
       const int CLUSSIZE = 25;
       Double_t clus_size[CLUSSIZE];
