@@ -61,24 +61,26 @@ void GetHist(int nbins, double gain, std::string in_path, TString out_path)
   }
 
   auto h2_mean_name = Form("hist_mean");
-  auto h2_mean = new TH2F(h2_mean_name, h2_mean_name, m_ny, 1.0, m_ny*1.0, m_nx, 1.0, m_nx*1.0);
+  auto h2_mean = new TH2F(h2_mean_name, h2_mean_name, m_ny, 1.0, m_ny * 1.0, m_nx, 1.0, m_nx * 1.0);
   auto h2_rms_name = Form("hist_rms");
-  auto h2_rms = new TH2F(h2_rms_name, h2_rms_name, m_ny, 1.0, m_ny*1.0, m_nx, 1.0, m_nx*1.0);
+  auto h2_rms = new TH2F(h2_rms_name, h2_rms_name, m_ny, 1.0, m_ny * 1.0, m_nx, 1.0, m_nx * 1.0);
   auto h2_rms_enc_name = Form("hist_rms_enc");
-  auto h2_rms_enc = new TH2F(h2_rms_enc_name, h2_rms_enc_name, m_ny, 1.0, m_ny*1.0, m_nx, 1.0, m_nx*1.0);
+  auto h2_rms_enc = new TH2F(h2_rms_enc_name, h2_rms_enc_name, m_ny, 1.0, m_ny * 1.0, m_nx, 1.0, m_nx * 1.0);
   double rms_enc_mean = 0;
   double rms_mean = 0;
   for (Int_t ix = 0; ix < m_nx; ix++)
     for (Int_t iy = 0; iy < m_ny; iy++) {
       auto pos = ix + m_nx * iy;
-      h2_mean->SetBinContent(iy+1.0, ix+1.0, base_hist[pos]->GetMean());
-      h2_rms->SetBinContent(iy+1.0, ix+1.0, base_hist[pos]->GetRMS());
-      h2_rms_enc->SetBinContent(iy+1.0, ix+1.0, base_hist[pos]->GetRMS() / gain);
-      rms_mean += base_hist[pos]->GetRMS();
-      rms_enc_mean += base_hist[pos]->GetRMS() / gain;
+      h2_mean->SetBinContent(iy + 1.0, ix + 1.0, base_hist[pos]->GetMean());
+      h2_rms->SetBinContent(iy + 1.0, ix + 1.0, base_hist[pos]->GetRMS());
+      h2_rms_enc->SetBinContent(iy + 1.0, ix + 1.0, base_hist[pos]->GetRMS() / gain);
+      if ((ix != 0) && (ix != m_nx - 1) && (iy != 0) && (iy != m_ny - 1)) {
+        rms_mean += base_hist[pos]->GetRMS();
+        rms_enc_mean += base_hist[pos]->GetRMS() / gain;
+      }
     }
-  rms_mean = rms_mean / m_nx / m_ny;
-  rms_enc_mean = rms_enc_mean / m_nx / m_ny;
+  rms_mean = rms_mean / (m_nx-1) / (m_ny-1);
+  rms_enc_mean = rms_enc_mean / (m_nx - 1) / (m_ny - 1);
   std::cout << "rms mean: " << rms_mean << std::endl;
   std::cout << "rms enc mean: " << rms_enc_mean << std::endl;
 
