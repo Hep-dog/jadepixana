@@ -2,6 +2,7 @@
 #include "TF1.h"
 #include "TFile.h"
 #include "TH1.h"
+#include "TMath.h"
 #include <iostream>
 #include <utility>
 #include <vector>

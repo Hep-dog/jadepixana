@@ -12,13 +12,13 @@
     "JadeRead":{
       "type":"default",
       "parameter":{
-        "PATH":"../data/raw_pixel/20180531/WeakFe_ND_CHIPA3_180531002130.df"
+        "PATH":"../data/source/20180811/WeakFe_CHIPA_NO3_A2_180811180725.df"
       }
     },
     "JadeAnalysis":{
       "type":"default",
       "parameter":{
-        "PATH":"./output2/WeakFe_ND_CHIPA3_1",
+        "PATH":"./output2/WeakFe_CHIPA_NO3_A2_1",
         "DISABLE_FILE_WRITE":false,
         "ENABLE_RAW_DATA_WRITE":false,
         "ENABLE_HIT_MAP_WRITE":false,

@@ -833,6 +833,151 @@ May_Sr_CHIPA7_file_name = [
   ,"Sr_CHIPA7_180501002620.df"
 ]
 
+WeakFe_CHIPB_NO1_B1_file_name=[
+  "WeakFe_CHIPB_NO1_B1_180811112118.df"
+  ,"WeakFe_CHIPB_NO1_B1_180811113120.df"
+  ,"WeakFe_CHIPB_NO1_B1_180811114122.df"
+  ,"WeakFe_CHIPB_NO1_B1_180811115125.df"
+  ,"WeakFe_CHIPB_NO1_B1_180811120127.df"
+  ,"WeakFe_CHIPB_NO1_B1_180811121129.df"
+]
+WeakFe_CHIPB_NO1_B2_file_name=[
+  "WeakFe_CHIPB_NO1_B2_180811122159.df"
+  ,"WeakFe_CHIPB_NO1_B2_180811123201.df"
+  ,"WeakFe_CHIPB_NO1_B2_180811124203.df"
+  ,"WeakFe_CHIPB_NO1_B2_180811125205.df"
+  ,"WeakFe_CHIPB_NO1_B2_180811130207.df"
+  ,"WeakFe_CHIPB_NO1_B2_180811131209.df"
+]
+WeakFe_CHIPB_NO1_B3_file_name=[
+  "WeakFe_CHIPB_NO1_B3_180811132455.df"
+  ,"WeakFe_CHIPB_NO1_B3_180811133457.df"
+  ,"WeakFe_CHIPB_NO1_B3_180811134459.df"
+  ,"WeakFe_CHIPB_NO1_B3_180811135501.df"
+  ,"WeakFe_CHIPB_NO1_B3_180811140503.df"
+  ,"WeakFe_CHIPB_NO1_B3_180811141505.df"
+]
+WeakFe_CHIPB_NO1_B4_file_name=[
+  "WeakFe_CHIPB_NO1_B4_180811142630.df"
+  ,"WeakFe_CHIPB_NO1_B4_180811143632.df"
+  ,"WeakFe_CHIPB_NO1_B4_180811144634.df"
+  ,"WeakFe_CHIPB_NO1_B4_180811145636.df"
+  ,"WeakFe_CHIPB_NO1_B4_180811150638.df"
+  ,"WeakFe_CHIPB_NO1_B4_180811151640.df"
+]
+WeakFe_CHIPB_NO1_B7_file_name=[
+  "WeakFe_CHIPB_NO1_B7_180811152844.df"
+  ,"WeakFe_CHIPB_NO1_B7_180811153846.df"
+  ,"WeakFe_CHIPB_NO1_B7_180811154848.df"
+  ,"WeakFe_CHIPB_NO1_B7_180811155850.df"
+  ,"WeakFe_CHIPB_NO1_B7_180811160852.df"
+  ,"WeakFe_CHIPB_NO1_B7_180811161854.df"
+]
+
+WeakFe_CHIPB_NO2_B1_file_name=[
+  "WeakFe_CHIPB_NO2_B1_180810151202.df"
+  ,"WeakFe_CHIPB_NO2_B1_180810152204.df"
+  ,"WeakFe_CHIPB_NO2_B1_180810153206.df"
+  ,"WeakFe_CHIPB_NO2_B1_180810154208.df"
+  ,"WeakFe_CHIPB_NO2_B1_180810155210.df"
+  ,"WeakFe_CHIPB_NO2_B1_180810160212.df"
+]
+
+WeakFe_CHIPB_NO2_B2_file_name=[
+  "WeakFe_CHIPB_NO2_B2_180810161807.df"
+  ,"WeakFe_CHIPB_NO2_B2_180810162809.df"
+  ,"WeakFe_CHIPB_NO2_B2_180810163811.df"
+  ,"WeakFe_CHIPB_NO2_B2_180810164813.df"
+  ,"WeakFe_CHIPB_NO2_B2_180810165815.df"
+  ,"WeakFe_CHIPB_NO2_B2_180810170817.df"
+]
+WeakFe_CHIPB_NO2_B3_file_name=[
+  "WeakFe_CHIPB_NO2_B3_180810195540.df"
+  ,"WeakFe_CHIPB_NO2_B3_180810200542.df"
+  ,"WeakFe_CHIPB_NO2_B3_180810201544.df"
+  ,"WeakFe_CHIPB_NO2_B3_180810202546.df"
+  ,"WeakFe_CHIPB_NO2_B3_180810203548.df"
+  ,"WeakFe_CHIPB_NO2_B3_180810204550.df"
+]
+WeakFe_CHIPB_NO2_B4_file_name=[
+  "WeakFe_CHIPB_NO2_B4_180810205609.df"
+  ,"WeakFe_CHIPB_NO2_B4_180810210611.df"
+  ,"WeakFe_CHIPB_NO2_B4_180810211613.df"
+  ,"WeakFe_CHIPB_NO2_B4_180810212615.df"
+  ,"WeakFe_CHIPB_NO2_B4_180810213618.df"
+  ,"WeakFe_CHIPB_NO2_B4_180810214620.df"
+]
+WeakFe_CHIPB_NO2_B7_file_name=[
+  "WeakFe_CHIPB_NO2_B7_180810220123.df"
+  ,"WeakFe_CHIPB_NO2_B7_180810221125.df"
+  ,"WeakFe_CHIPB_NO2_B7_180810222127.df"
+  ,"WeakFe_CHIPB_NO2_B7_180810223129.df"
+  ,"WeakFe_CHIPB_NO2_B7_180810224131.df"
+  ,"WeakFe_CHIPB_NO2_B7_180810225133.df"
+]
+
+WeakFe_CHIPA_NO6_A1_file_name=[
+  "WeakFe_CHIPA_NO6_A1_180812140139.df"
+  ,"WeakFe_CHIPA_NO6_A1_180812141141.df"
+]
+WeakFe_CHIPA_NO6_A2_file_name=[
+  "WeakFe_CHIPA_NO6_A2_180812142203.df"
+  ,"WeakFe_CHIPA_NO6_A2_180812143205.df"
+]
+WeakFe_CHIPA_NO6_A3_file_name=[
+  "WeakFe_CHIPA_NO6_A3_180812145508.df"
+  ,"WeakFe_CHIPA_NO6_A3_180812150510.df"
+]
+WeakFe_CHIPA_NO6_A4_file_name=[
+  "WeakFe_CHIPA_NO6_A4_180812152137.df"
+  ,"WeakFe_CHIPA_NO6_A4_180812153139.df"
+]
+WeakFe_CHIPA_NO6_A7_file_name=[
+  "WeakFe_CHIPA_NO6_A7_180812154203.df"
+  ,"WeakFe_CHIPA_NO6_A7_180812155205.df"
+]
+
+WeakFe_CHIPA_NO5_A1_file_name=[
+  "WeakFe_CHIPA_NO5_A1_180812102614.df"
+  ,"WeakFe_CHIPA_NO5_A1_180812103616.df"
+]
+WeakFe_CHIPA_NO5_A2_file_name=[
+  "WeakFe_CHIPA_NO5_A2_180812105752.df"
+  ,"WeakFe_CHIPA_NO5_A2_180812110754.df"
+]
+WeakFe_CHIPA_NO5_A3_file_name=[
+  "WeakFe_CHIPA_NO5_A3_180812111813.df"
+  ,"WeakFe_CHIPA_NO5_A3_180812112815.df"
+]
+WeakFe_CHIPA_NO5_A4_file_name=[
+  "WeakFe_CHIPA_NO5_A4_180812122046.df"
+  ,"WeakFe_CHIPA_NO5_A4_180812123048.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814190955.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814191957.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814192959.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814194001.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814195003.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814200005.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814201007.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814202009.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814203011.df"
+  ,"WeakFe_CHIPA_NO5_A4_180814204013.df"
+]
+WeakFe_CHIPA_NO5_A7_file_name=[
+  "WeakFe_CHIPA_NO5_A7_180812124114.df"
+  ,"WeakFe_CHIPA_NO5_A7_180812125116.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814220649.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814221651.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814222654.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814223656.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814224658.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814225700.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814230702.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814231704.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814232706.df"
+  ,"WeakFe_CHIPA_NO5_A7_180814233708.df"
+]
+
 parser = argparse.ArgumentParser(description='JadePix Analysis Config')
 parser.add_argument('-s',
                     action='store',
@@ -874,10 +1019,10 @@ ARGS = parser.parse_args()
 def get_file_name(source_name,chip_number):
   if(source_name=="Noise"):
     infile_name = source_name+"_file_name"
-    outfile_name = source_name+"_CHIPA" + str(chip_number)
+    outfile_name = source_name + str(chip_number)
   else:
-    infile_name = source_name+"_CHIPA"+ str(chip_number) +"_file_name"
-    outfile_name = source_name+"_CHIPA" + str(chip_number)
+    infile_name = source_name + str(chip_number) +"_file_name"
+    outfile_name = source_name + str(chip_number)
 
     return [infile_name, outfile_name]
 
@@ -936,7 +1081,7 @@ def gen_config():
 
       print("================== start >>>>>>>>>>\n")
 
-      config_file = "config/"+ARGS.source_name+"_CHIPA" + str(ARGS.chip_number) + "_run" + str(i).zfill(5) + ".json"
+      config_file = "config/"+ARGS.source_name + str(ARGS.chip_number) + "_run" + str(i).zfill(5) + ".json"
 
       copy_cmd = "cp "+ARGS.template_json+" "+ config_file
 
