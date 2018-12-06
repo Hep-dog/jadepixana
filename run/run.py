@@ -51,14 +51,14 @@ def job_text(i):
 
 cd {0}/run
 source {0}/etc/{1}
-RunTest -c config/{2}_CHIPA{3}_run{4}.json
+RunTest -c config/{2}_A{3}_run{4}.json
 '''.format(JADEPIXANA_DIR, JADEPIXANA_ENV_SHELL, \
            ARGS.source_name,str(ARGS.chip_number), str(i).zfill(5))
 
     return text
 
 def gen_job(i):
-    job_file_name = "script/"+ARGS.source_name+"_CHIPA" + str(ARGS.chip_number) \
+    job_file_name = "script/"+ARGS.source_name+"_A" + str(ARGS.chip_number) \
         + "_job_" + str(i) + ".sh"
     job_file = open(job_file_name,"w")
     job_file.write(job_text(i))
@@ -69,10 +69,10 @@ def gen_job(i):
 
 def sub_job(i, job_file):
     job_cmd = "hep_sub -g atlas -o /scratchfs/atlas/chenlj/jadepix/log/" \
-        + ARGS.source_name+"_CHIPA" \
+        + ARGS.source_name+"_A" \
         + str(ARGS.chip_number) +"_run" + str(i).zfill(5) \
         + ".log -e  /scratchfs/atlas/chenlj/jadepix/log/" \
-        + ARGS.source_name+"_CHIPA" \
+        + ARGS.source_name+"_A" \
         + str(ARGS.chip_number) + "_err" + str(i).zfill(5) + ".log " + job_file
 
     print(job_cmd)
