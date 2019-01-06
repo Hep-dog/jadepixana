@@ -675,6 +675,18 @@ Sr_J1_A_NO5_A7_file_name=[
   ,"Sr_J1_A_NO5_A7_181202224232.df"
 ]
 
+Sr_J1_A_NC1_A1_file_name=[
+  "Sr_J1_A_NC1_A1_181224151853.df"
+  ,"Sr_J1_A_NC1_A1_181224170944.df"
+  ,"Sr_J1_A_NC1_A1_181224172447.df"
+  ,"Sr_J1_A_NC1_A1_181224174156.df"
+  ,"Sr_J1_A_NC1_A1_181224175658.df"
+  ,"Sr_J1_A_NC1_A1_181224181201.df"
+  ,"Sr_J1_A_NC1_A1_181224182703.df"
+  ,"Sr_J1_A_NC1_A1_181224184205.df"
+  ,"Sr_J1_A_NC1_A1_181224185707.df"
+]
+
 parser = argparse.ArgumentParser(description='JadePix Analysis Config')
 parser.add_argument('-s',
                     action='store',

@@ -1,10 +1,10 @@
 #include "JadeAnalysis.hh"
 
-JadeAnalysis::JadeAnalysis(const JadeOption& opt)
-    : m_opt(opt)
-    , m_ev_n(0)
-    , m_ev_print(0)
-    , m_base_count(0)
+  JadeAnalysis::JadeAnalysis(const JadeOption& opt)
+  : m_opt(opt)
+  , m_ev_n(0)
+  , m_ev_print(0)
+  , m_base_count(0)
     , m_base_numbers(1000)
 {
   m_ev_print = m_opt.GetIntValue("PRINT_EVENT_N");
@@ -12,11 +12,16 @@ JadeAnalysis::JadeAnalysis(const JadeOption& opt)
   m_neigh_cut = m_opt.GetIntValue("NEIGHGBOR_CUT");
   m_clus_cut = m_opt.GetIntValue("CLUSTER_CUT");
   m_clus_size = m_opt.GetIntValue("CLUSTER_SIZE");
+  m_clus_fix_size = m_opt.GetIntValue("CLUSTER_FIX_WINDOW_SIZE");
   m_distance_cut = m_opt.GetFloatValue("DISTANCE_CUT");
   m_base_cut = m_opt.GetIntValue("BASE_CUT");
   m_base_numbers = m_opt.GetIntValue("BASE_NUMBERS");
   m_enable_raw_data_write = m_opt.GetBoolValue("ENABLE_RAW_DATA_WRITE");
   m_enable_hit_map_write = m_opt.GetBoolValue("ENABLE_HIT_MAP_WRITE");
+  m_enable_fix_window_clus_write = m_opt.GetBoolValue("ENABLE_FIX_WINDOW_CLUS_WRITE");
+  m_enable_sparse_clus_write=m_opt.GetBoolValue("ENABLE_SPARSE_CLUS_WRITE");
+  m_enable_tree_write = m_opt.GetBoolValue("ENABLE_TREE_WRITE");
+  m_enable_hist_write = m_opt.GetBoolValue("ENABLE_HIST_WRITE");
   m_hist_nbins = m_opt.GetIntValue("HIST_NBINS");
   m_serial_orders = m_opt.GetIntValue("SERIAL_ORDERS");
 }
@@ -44,6 +49,9 @@ void JadeAnalysis::Open()
   m_tree_adc->Branch("cluster_size", &m_output_clus_size);
   m_tree_adc->Branch("base_adc", &m_output_base_adc);
   m_tree_adc->Branch("pileup_counts", &m_output_pileup_counts);
+  if(m_enable_fix_window_clus_write){
+    m_tree_adc->Branch(Form("cluster%dx%d_adc",m_clus_fix_size,m_clus_fix_size),&m_output_clus_fix_adc);
+  }
   if (m_enable_raw_data_write) {
     m_tree_adc->Branch("cds_adc", &m_cds_adc);
     m_tree_adc->Branch("raw_adc", &m_raw_adc);
@@ -56,6 +64,16 @@ void JadeAnalysis::Open()
       m_hist_nbins, 0, m_hist_nbins, m_clus_size * m_clus_size, 1, m_clus_size * m_clus_size);
   m_hist_serial_order_counts = std::make_shared<TH1D>("serial_order_counts", "serial_order_counts",
       m_serial_orders, 0, m_serial_orders);
+  m_hist_seed_adc = std::make_shared<TH1D>("seed_adc", "seed_adc", m_hist_nbins, 0, m_hist_nbins);
+  m_hist_clus_adc = std::make_shared<TH1D>("clus_adc", "clus_adc", m_hist_nbins, 0, m_hist_nbins);
+
+  if(m_enable_fix_window_clus_write){
+    TString hist_name = Form("npixels_cluster%dx%d_adc", m_clus_fix_size, m_clus_fix_size);
+    m_hist2_clus_fix_adc = std::make_shared<TH2D>(hist_name, hist_name, m_clus_fix_size * m_clus_fix_size,
+        0, m_clus_fix_size * m_clus_fix_size, m_hist_nbins, 0, m_hist_nbins);
+    m_hist_clus_fix_adc = std::make_shared<TH1D>(Form("cluster%dx%d_adc", m_clus_fix_size, m_clus_fix_size),
+        Form("cluster%dx%d_adc", m_clus_fix_size, m_clus_fix_size), m_hist_nbins, 0, m_hist_nbins);
+  }
 }
 
 void JadeAnalysis::Reset()
@@ -69,9 +87,19 @@ void JadeAnalysis::Close()
   if (m_disable_file_write)
     return;
   if (m_fd->IsOpen()) {
-    m_tree_adc->Write();
-    m_hist2_clus_size_adc->Write();
-    m_hist_serial_order_counts->Write();
+    if(m_enable_tree_write){
+      m_tree_adc->Write();
+    }
+    if(m_enable_sparse_clus_write){
+      m_hist2_clus_size_adc->Write();
+      m_hist_seed_adc->Write();
+      m_hist_clus_adc->Write();
+      m_hist_serial_order_counts->Write();
+    }
+    if(m_enable_fix_window_clus_write){
+      m_hist2_clus_fix_adc->Write();
+      m_hist_clus_fix_adc->Write();
+    }
     m_fd->Close();
   }
 }
@@ -104,7 +132,7 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   if (m_base_count < m_base_numbers) {
     auto cds_adc = df->GetFrameCDS();
     if (std::none_of(cds_adc.begin(), cds_adc.end(),
-            [=](auto& cds) { return cds > m_base_cut ? true : false; })) {
+          [=](auto& cds) { return abs(cds) > m_base_cut ? true : false; })) {
       m_output_base_adc.swap(cds_adc);
       m_base_count++;
     }
@@ -115,10 +143,15 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   m_clus->SetNeighbourTHR(m_neigh_cut);
   m_clus->SetClusterTHR(m_clus_cut);
   m_clus->SetClusterSize(m_clus_size);
+  m_clus->SetClusterFixSize(m_clus_fix_size);
   m_clus->SetDistanceCut(m_distance_cut);
   m_clus->FindSeed();
   m_clus->FindPileUp();
   m_clus->FindCluster();
+
+  if(m_enable_fix_window_clus_write){
+    m_clus->FindFixWindowCluster();
+  }
 
   auto pileup_counts = m_clus->GetPileUpCounts();
   m_output_pileup_counts.clear();
@@ -132,6 +165,7 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
     for (auto& adc : seed_adc) {
       //std::cout << '\t' << adc;
       m_output_seed_adc.push_back(adc);
+      m_hist_seed_adc->Fill(adc);
     }
     //std::cout << '\n';
   }
@@ -142,6 +176,7 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   for (auto& adc : clus_adc) {
     //std::cout << '\t' << adc;
     m_output_clus_adc.push_back(adc);
+    m_hist_clus_adc->Fill(adc);
   }
 
   //std::cout << '\n';
@@ -156,6 +191,27 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
     m_output_clus_size.push_back(size);
   }
   //std::cout << '\n';
+  if (m_enable_fix_window_clus_write) {
+    std::cout << "cluster ADC: " << std::endl;
+    auto clus_fix_adc = m_clus->GetFixWindowClusterADC();
+    m_output_clus_fix_adc.clear();
+    for (auto& adc : clus_fix_adc) {
+      //std::cout << '\t' << adc;
+      m_output_clus_fix_adc.push_back(adc);
+      m_hist_clus_fix_adc->Fill(adc);
+    }
+
+    auto clus_npixels_adc = m_clus->GetNPixelsADC();
+    if (!clus_npixels_adc.empty()) {
+      for (auto& npixels_adc : clus_npixels_adc) {
+        if (npixels_adc.size() != m_clus_fix_size * m_clus_fix_size)
+          continue;
+        for (int i = 0; i < npixels_adc.size(); i++) {
+          m_hist2_clus_fix_adc->Fill(i + 1, npixels_adc.at(i));
+        }
+      }
+    }
+  }
 
   if (m_enable_hit_map_write) {
     auto center = m_clus->GetCenterOfGravity();
