@@ -6,7 +6,7 @@
       "parameter":{
         "something": "somthing",
         "ENABLE_READ_FRAME_LIMITS":true,
-        "READ_FRAME_NUMBERS": 10000
+        "READ_FRAME_NUMBERS": 200000
       }
     },
     "JadeRead":{
@@ -20,7 +20,7 @@
       "parameter":{
         "PATH":"./output/Noise_CHIPA1_4",
         "DISABLE_FILE_WRITE":false,
-        "ENABLE_RAW_DATA_WRITE":false,
+        "ENABLE_RAW_DATA_WRITE":true,
         "ENABLE_HIT_MAP_WRITE":false,
         "PRINT_EVENT_N": 2000,
         "SEED_CUT":500,
@@ -28,7 +28,7 @@
         "DISTANCE_CUT":3,
         "NEIGHGBOR_CUT":200,
         "BASE_CUT":500,
-        "BASE_NUMBERS":10000,
+        "BASE_NUMBERS":2500000,
         "CLUSTER_SIZE":5,
         "CLUSTER_FIX_WINDOW_SIZE":5,
         "HIST_NBINS":20000,

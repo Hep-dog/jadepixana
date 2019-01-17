@@ -60,6 +60,10 @@ add_executable(GenRaw src/GenRaw.cxx)
 target_link_libraries(GenRaw ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS GenRaw)
 
+add_executable(GenSeed src/GenSeed.cxx)
+target_link_libraries(GenSeed ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS GenSeed)
+
 add_executable(GenClusSize src/GenClusSize.cxx)
 target_link_libraries(GenClusSize ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS GenClusSize)

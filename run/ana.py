@@ -34,7 +34,8 @@ ARGS = parser.parse_args()
 
 def add():
     for i in range(ARGS.chip_number_start, ARGS.chip_number_end):
-        cmd = "AddTest -c " + str(i) +" -s 1 -e 7 -n WeakFe_ND -i output -o output/WeakFe_ND_Tree_CHIPA" + str(i) + ".root"
+        #cmd = "AddTest -c " + str(i) +" -s 1 -e 7 -n WeakFe_ND -i output -o output/WeakFe_ND_Tree_CHIPA" + str(i) + ".root"
+        cmd = "AddTest -c " + str(i) + "-s 1 -e 17 -n Sr_J1_A_NO5_A -i output -o output/Sr_J1_A_NO5_A" + str(i) + "_Tree.root"
         subprocess.run(cmd, shell=True)
         time.sleep(1)
 

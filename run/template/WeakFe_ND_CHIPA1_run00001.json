@@ -18,10 +18,10 @@
     "JadeAnalysis":{
       "type":"default",
       "parameter":{
-        "PATH":"./output2/WeakFe_ND_CHIPA1_1",
+        "PATH":"./output/WeakFe_ND_CHIPA1_1",
         "DISABLE_FILE_WRITE":false,
         "ENABLE_RAW_DATA_WRITE":false,
-        "ENABLE_HIT_MAP_WRITE":false,
+        "ENABLE_HIT_MAP_WRITE":true,
         "PRINT_EVENT_N": 10000,
         "SEED_CUT":1500,
         "CLUSTER_CUT":1500,

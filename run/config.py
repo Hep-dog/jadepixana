@@ -978,6 +978,28 @@ WeakFe_CHIPA_NO5_A7_file_name=[
   ,"WeakFe_CHIPA_NO5_A7_180814233708.df"
 ]
 
+
+WeakFe_CHIPA_NO6_A1_file_name=[
+  "WeakFe_CHIPA_NO6_A1_180812140139.df"
+  ,"WeakFe_CHIPA_NO6_A1_180812141141.df"
+]
+WeakFe_CHIPA_NO6_A2_file_name=[
+  "WeakFe_CHIPA_NO6_A2_180812142203.df"
+  ,"WeakFe_CHIPA_NO6_A2_180812143205.df"
+]
+WeakFe_CHIPA_NO6_A3_file_name=[
+  "WeakFe_CHIPA_NO6_A3_180812145508.df"
+  ,"WeakFe_CHIPA_NO6_A3_180812150510.df"
+]
+WeakFe_CHIPA_NO6_A4_file_name=[
+  "WeakFe_CHIPA_NO6_A4_180812152137.df"
+  ,"WeakFe_CHIPA_NO6_A4_180812153139.df"
+]
+WeakFe_CHIPA_NO6_A7_file_name=[
+  "WeakFe_CHIPA_NO6_A7_180812154203.df"
+  ,"WeakFe_CHIPA_NO6_A7_180812155205.df"
+]
+
 parser = argparse.ArgumentParser(description='JadePix Analysis Config')
 parser.add_argument('-s',
                     action='store',
