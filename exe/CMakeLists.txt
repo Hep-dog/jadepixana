@@ -24,6 +24,10 @@ add_executable(GenTest src/GenTest.cxx)
 target_link_libraries(GenTest ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS GenTest)
 
+add_executable(GenRaw src/GenRaw.cxx)
+target_link_libraries(GenRaw ${JADE_CORE_LIBRARY})
+list(APPEND INSTALL_TARGETS GenRaw)
+
 add_executable(ProjectTest src/ProjectTest.cxx)
 target_link_libraries(ProjectTest ${JADE_CORE_LIBRARY})
 list(APPEND INSTALL_TARGETS ProjectTest)

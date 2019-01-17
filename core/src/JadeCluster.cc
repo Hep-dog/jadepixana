@@ -76,7 +76,7 @@ void JadeCluster::SetDistanceCut(double cut)
 
 bool JadeCluster::IsInEdge(size_t x, size_t y) const
 {
-  if (x - m_offset_x == m_n_x && y - m_offset_y == m_n_y && x == m_offset_x && y == m_offset_y)
+  if ((x - m_offset_x == m_n_x || y - m_offset_y == m_n_y || x == m_offset_x || y == m_offset_y) || (x - m_offset_x == m_n_x-1 || y - m_offset_y == m_n_y-1 || x == m_offset_x+1 || y == m_offset_y+1))
     return true;
   else
     return false;
@@ -131,10 +131,8 @@ void JadeCluster::FindSeed()
   for (size_t iy = 0; iy < m_n_y; iy++)
     for (size_t ix = 0; ix < m_n_x; ix++) {
       auto adc_value = GetPixelADC(ix, iy);
-      // mask pixels that cannot pass neighbour threshold
-      if (adc_value < m_neigh_thr) {
-        SetPixelMask(ix, iy);
-      } else if ((adc_value > m_seed_thr) && (IsMax(ix, iy))) {
+      // find pixel above seed cut, mask seed pixels in edge
+      if ((adc_value > m_seed_thr) && (IsMax(ix, iy) && !IsInEdge(ix,iy))) {
         seed _seed;
         _seed.coord = std::make_pair(ix, iy);
         _seed.adc = adc_value;

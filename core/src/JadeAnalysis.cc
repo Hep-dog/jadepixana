@@ -192,7 +192,7 @@ void JadeAnalysis::Analysis(JadeDataFrameSP df)
   }
   //std::cout << '\n';
   if (m_enable_fix_window_clus_write) {
-    std::cout << "cluster ADC: " << std::endl;
+    //std::cout << "cluster ADC: " << std::endl;
     auto clus_fix_adc = m_clus->GetFixWindowClusterADC();
     m_output_clus_fix_adc.clear();
     for (auto& adc : clus_fix_adc) {

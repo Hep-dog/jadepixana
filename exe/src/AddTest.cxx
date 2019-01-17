@@ -14,7 +14,7 @@ void AddTree(int istart, int iend, int chip_number, std::string in_path, std::st
   for (int i = istart; i < iend; i++) {
 
     std::cout << "---------> " << i << " <------------" << std::endl;
-    TString infile_name = Form("%s/%s_CHIPA%d_%d.root", in_path.c_str(), source_name.c_str(),chip_number, i);
+    TString infile_name = Form("%s/%s%d_%d.root", in_path.c_str(), source_name.c_str(),chip_number, i);
 
     std::cout << "---------> Processing file " << infile_name << std::endl;
     chain->Add(infile_name);

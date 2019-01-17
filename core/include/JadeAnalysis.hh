@@ -57,7 +57,7 @@ class DLLEXPORT JadeAnalysis{
     std::vector<int> m_output_clus_fix_adc;
     std::vector<int16_t> m_output_base_adc;
     std::vector<int> m_output_pileup_counts;
-    std::vector<std::pair<int, int>> m_hit;
+    std::vector<std::pair<double, double>> m_hit;
     std::vector<int16_t> m_cds_adc;
     std::vector<int16_t> m_raw_adc;
     bool m_disable_file_write;
