@@ -93,8 +93,9 @@ bool JadeCluster::IsInMatrix(size_t x, size_t y) const
 bool JadeCluster::IsMax(size_t x, size_t y)
 {
   auto adc_value = GetPixelADC(x, y);
-  for (size_t ix = x - 1; ix <= x + 1; ix++)
-    for (size_t iy = y - 1; iy <= y + 1; iy++)
+  auto size = int(m_fix_size / 2);
+  for (size_t ix = x - size; ix <= x + size; ix++)
+    for (size_t iy = y - size; iy <= y + size; iy++)
       if (!IsInMatrix(ix, iy)) {
         continue;
       } else if (GetPixelADC(ix, iy) > adc_value) {
