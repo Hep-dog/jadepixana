@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/ProjectTest.dir/src/ProjectTest.cxx.o  -o ProjectTest -Wl,-rpath,:::::::::::::: 

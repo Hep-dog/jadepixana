@@ -1,1 +1,0 @@
-/usr/bin/c++    -rdynamic CMakeFiles/ThreadTest.dir/src/ThreadTest.cxx.o  -o ThreadTest -Wl,-rpath,:::::::::::::: 
